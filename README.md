@@ -6,14 +6,15 @@
 
 ## 環境構築の手順
 
-- `git clone git@github.com:sangwon-lee302/flee-market.git`
-- `cd flee-market`
+- `git clone git@github.com:sangwon-lee302/flea-market.git`
+- `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd)":/opt -w /opt laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
-- `cp .env.example .env`, `.env`編集(OS環境変数を適宜変更)
+- `cp .env.example .env`、`.env`編集(OS環境変数を適宜変更)
 - `sail up -d`
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
 - `sail npm i && sail npm run dev`
+- Node.jsをホスト側にインストールしていない場合、Node.jsをインストールする（huskyによるpre-commit時のコードフォーマットを正常に実行するため）
 
 ## 使用技術
 
