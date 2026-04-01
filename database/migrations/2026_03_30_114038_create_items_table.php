@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('image_path');
             $table->unsignedTinyInteger('condition');
-            $table->string('name', 100);
-            $table->string('brand_name', 100)->nullable();
+            $table->string('name');
+            $table->string('brand_name')->nullable();
             $table->string('description');
             $table->unsignedInteger('price');
             $table->boolean('is_sold')->default(false);

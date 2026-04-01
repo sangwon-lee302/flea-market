@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unique('user_id');
 
             $table->string('image_path')->nullable();
-            $table->string('nickname', 20)->nullable();
+            $table->string('nickname')->nullable();
             $table->char('postal_code', 8)->nullable();
             $table->string('address')->nullable();
             $table->string('building')->nullable();

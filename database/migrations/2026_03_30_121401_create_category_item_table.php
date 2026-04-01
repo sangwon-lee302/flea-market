@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('category_item', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
 
             $table->unique(['category_id', 'item_id']);
