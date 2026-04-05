@@ -20,14 +20,6 @@
         "tailwindcss": "^4.0.0",
         "vite": "^8.0.0"
     },
-    "lint-staged": {
-        "**/*.php": [
-            "bash -c './vendor/bin/sail bin pint $0' --"
-        ],
-        "**/*.{blade.php,js,css,json,md}": [
-            "npx prettier --write"
-        ]
-    },
     "volta": {
         "node": "24.14.0"
     }

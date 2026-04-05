@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read Collection<int, Item> $items
  * @property-read int|null $items_count
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereSlug($value)
+ *
  * @mixin \Eloquent
  */
 class Category extends Model

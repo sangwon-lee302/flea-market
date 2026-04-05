@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Condition;
-use Dom\Comment;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -47,6 +46,8 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $likes_count
  * @property-read Order|null $order
  * @property-read User $user
+ * @property-read Collection<int, Comment> $comments
+ * @property-read int|null $comments_count
  *
  * @mixin \Eloquent
  */
