@@ -192,7 +192,7 @@ return [
         'display_type'             => '表示タイプ',
         'district'                 => '地区',
         'duration'                 => '期間',
-        'email'                    => 'メール',
+        'email'                    => 'メールアドレス',
         'excerpt'                  => '抜粋',
         'filter'                   => 'フィルタ',
         'finished_at'              => '終了日',
