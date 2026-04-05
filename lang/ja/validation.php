@@ -227,7 +227,7 @@ return [
         'national_code'            => '国コード',
         'number'                   => '番号',
         'password'                 => 'パスワード',
-        'password_confirmation'    => 'パスワードの確認',
+        'password_confirmation'    => '確認用パスワード',
         'phone'                    => '電話番号',
         'photo'                    => '写真',
         'portfolio'                => 'ポートフォリオ',
