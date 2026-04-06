@@ -22,6 +22,7 @@
 - PHP 8.5.3
 - Mysql 8.4.8
 - Node 24.14.0
+- Mailpit v1.29.5
 
 ## ER図
 
