@@ -14,7 +14,7 @@
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
 - `sail npm i && sail npm run dev`
-- Node.jsをホスト側にインストールしていない場合、Node.jsをインストールする（huskyによるpre-commit時のコードフォーマットを正常に実行するため）
+- huskyによるpre-commit時のコードフォーマットを正常に実行するために、Node.jsを（sail経由ではなく）ホスト側のOS上で直接インストールする
 
 ## 使用技術
 
