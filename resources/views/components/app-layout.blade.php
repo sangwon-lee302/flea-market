@@ -11,6 +11,21 @@
         class="flex items-center justify-between bg-black px-4 py-6 text-white"
     >
         <img src="{{ asset('images/header_logo.png') }}" alt="Company Logo" />
+
+        @unless (request()->routeIs(['login', 'register', 'verification.*']))
+            <nav class="flex items-center justify-between">
+                @auth
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="cursor-pointer">ログアウト</button>
+                    </form>
+                @endauth
+
+                @guest
+                    <a href="{{ route('login') }}">ログイン</a>
+                @endguest
+            </nav>
+        @endunless
     </header>
 
     <main {{ $attributes->merge(['class' => 'mx-auto min-h-full']) }}
