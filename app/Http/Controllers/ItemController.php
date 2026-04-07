@@ -18,6 +18,6 @@ class ItemController extends Controller
             $items = Item::when(Auth::check(), fn ($q) => $q->whereNot('user_id', Auth::id()))->get();
         }
 
-        return view('item.index', compact('items'));
+        return view('items.index', compact('items'));
     }
 }

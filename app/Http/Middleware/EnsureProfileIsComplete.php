@@ -16,8 +16,8 @@ class EnsureProfileIsComplete
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && empty(Auth::user()->nickname) && ! $request->routeIs('profile.edit')) {
-            return redirect()->route('profile.edit');
+        if (Auth::check() && empty(Auth::user()->nickname) && ! $request->routeIs('profiles.edit')) {
+            return redirect()->route('profiles.edit');
         }
 
         return $next($request);
