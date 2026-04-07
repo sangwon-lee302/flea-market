@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -82,18 +83,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Item::class);
     }
 
-    public function orders(): HasMany
+    public function orderedItems(): BelongsToMany
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsToMany(Item::class, 'orders');
     }
 
-    public function likes(): HasMany
+    public function likedItems(): BelongsToMany
     {
-        return $this->hasMany(Like::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Item::class, 'likes');
     }
 }
