@@ -5,7 +5,6 @@ namespace App\Models;
 use App\CategoryType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -32,11 +31,6 @@ class Category extends Model
         return [
             'slug' => CategoryType::class,
         ];
-    }
-
-    public function items(): BelongsToMany
-    {
-        return $this->belongsToMany(Item::class);
     }
 
     public function getRouteKeyName()

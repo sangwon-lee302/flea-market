@@ -37,9 +37,4 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function item(): BelongsTo
-    {
-        return $this->belongsTo(Item::class);
-    }
 }
