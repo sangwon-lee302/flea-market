@@ -99,7 +99,7 @@ return [
         'array'   => ':attributeの項目数は、:min個以上にしてください。',
         'file'    => ':attributeには、:min KB以上のファイルを指定してください。',
         'numeric' => ':attributeには、:min以上の数値を指定してください。',
-        'string'  => ':attributeは、:min文字以上で入力してください',
+        'string'  => ':attributeは:min文字以上で入力してください',
     ],
     'min_digits'       => ':attributeは、:min桁以上の数字である必要があります。',
     'missing'          => ':attribute を入力する必要はありません。',

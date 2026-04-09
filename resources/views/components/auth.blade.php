@@ -1,23 +1,26 @@
-@props (['title', 'route'])
+@props ([
+    'title' => '',
+    'buttonText' => '',
+    'anchorHref' => '/',
+    'anchorText' => '',
+])
 
-<x-app-layout class="w-[75%] max-w-2xl pt-40">
-    <h1 class="text-center text-4xl font-bold">{{ $title }}</h1>
-
-    <form
-        action="{{ $formAction }}"
-        method="POST"
-        class="mt-12 flex flex-col"
-        novalidate
+<x-app-layout class="w-[75%] max-w-2xl pt-30">
+    <x-form
+        {{ $attributes->merge([
+            'title' => $title,
+            'method' => 'POST',
+            'novalidate',
+        ]) }}
     >
-        @csrf
-        {{ $slot }}
+        <div class="flex flex-col gap-8">{{ $slot }}</div>
 
-        <x-form.button>{{ $buttonLabel }}</x-form.button>
+        <x-form.button class="mt-16">{{ $buttonText }}</x-form.button>
+    </x-form>
 
-        <a
-            href="{{ $anchorHref }}"
-            class="mx-auto mt-8 text-blue-600 hover:underline"
-            >{{ $anchorText }}</a
-        >
-    </form>
+    <x-anchor
+        :href="$anchorHref"
+        class="mt-8 block w-fit"
+        >{{ $anchorText }}</x-anchor
+    >
 </x-app-layout>

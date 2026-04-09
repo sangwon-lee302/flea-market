@@ -1,25 +1,12 @@
-<x-auth>
-    <x-slot:title>
-        会員登録
-    </x-slot:title>
-
-    <x-slot:formAction>
-        {{ route('register') }}
-    </x-slot:formAction>
-
-    <x-form.label-input field="name" />
-    <x-form.label-input field="email" type="email" />
-    <x-form.label-input field="password" type="password" />
-    <x-form.label-input field="password_confirmation" type="password" />
-
-    <x-slot:buttonLabel>
-        登録する
-    </x-slot:buttonLabel>
-
-    <x-slot:anchorHref>
-        {{ route('login') }}
-    </x-slot:anchorHref>
-    <x-slot:anchorText>
-        ログインはこちら
-    </x-slot:anchorText>
+<x-auth
+    title="会員登録"
+    action="{{ route('register') }}"
+    buttonText="登録する"
+    :anchorHref="route('login')"
+    anchorText="ログインはこちら"
+>
+    <x-form.input-field field="name" />
+    <x-form.input-field field="email" type="email" />
+    <x-form.input-field field="password" type="password" />
+    <x-form.input-field field="password_confirmation" type="password" />
 </x-auth>
