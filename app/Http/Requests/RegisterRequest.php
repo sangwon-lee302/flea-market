@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
