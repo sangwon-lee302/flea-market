@@ -29,12 +29,7 @@ class Category extends Model
     public function casts()
     {
         return [
-            'slug' => CategoryType::class,
+            'name' => CategoryType::class,
         ];
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 }
