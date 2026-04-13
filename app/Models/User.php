@@ -51,6 +51,10 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $likes_count
  * @property-read Collection<int, Order> $orders
  * @property-read int|null $orders_count
+ * @property-read Collection<int, Item> $likedItems
+ * @property-read int|null $liked_items_count
+ * @property-read Collection<int, Item> $orderedItems
+ * @property-read int|null $ordered_items_count
  *
  * @mixin \Eloquent
  */
