@@ -1,9 +1,9 @@
 <x-auth
     title="会員登録"
     action="{{ route('register') }}"
-    buttonText="登録する"
-    :anchorHref="route('login')"
-    anchorText="ログインはこちら"
+    button-text="登録する"
+    :anchor-href="route('login')"
+    anchor-text="ログインはこちら"
 >
     <x-form.input-field field="name" />
     <x-form.input-field field="email" type="email" />
