@@ -28,7 +28,7 @@
         @endunless
     </header>
 
-    <main {{ $attributes->merge(['class' => 'mx-auto min-h-full']) }}
+    <main {{ $attributes->twMerge(['class' => 'mx-auto min-h-full']) }}
         >{{ $slot }}
     </main>
 </body>

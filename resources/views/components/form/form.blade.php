@@ -13,10 +13,8 @@
     <h1 class="text-center text-4xl font-bold">{{ $title }}</h1>
 
     <form
-        {{ $attributes->merge([
-            'method' => $isGet ? 'GET' : 'POST',
-            'class' => 'mt-12 flex flex-col',
-        ]) }}
+        method="{{ $isGet ? 'GET' : 'POST' }}"
+        {{ $attributes->twMerge(['class' => 'mt-12 flex flex-col']) }}
     >
         @if (! $isGet)
             @csrf

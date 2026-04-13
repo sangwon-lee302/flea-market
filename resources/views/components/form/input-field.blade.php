@@ -10,7 +10,7 @@
         id="{{ $field }}"
         name="{{ $field }}"
         value="{{ old($field) }}"
-        {{ $attributes->merge(['type' => 'text', 'class' => 'border p-2 rounded-sm border-gray-500']) }}
+        {{ $attributes->twMerge(['class' => 'border p-2 rounded-sm border-gray-500']) }}
     />
     @error ($field)
         <div class="text-red-500">{{ $message }}</div>
