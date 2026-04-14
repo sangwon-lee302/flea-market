@@ -13,7 +13,7 @@
         <img src="{{ asset('images/header_logo.png') }}" alt="Company Logo" />
 
         @unless (request()->routeIs(['login', 'register', 'verification.*']))
-            <nav class="flex items-center justify-between">
+            <nav class="flex items-center justify-between gap-4">
                 @auth
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -24,11 +24,13 @@
                 @guest
                     <a href="{{ route('login') }}">ログイン</a>
                 @endguest
+
+                <a href="{{ route('profiles.show') }}">マイページ</a>
             </nav>
         @endunless
     </header>
 
-    <main {{ $attributes->twMerge(['class' => 'mx-auto min-h-full']) }}
+    <main {{ $attributes->twMerge(['class' => 'mx-auto pb-30 min-h-full']) }}
         >{{ $slot }}
     </main>
 </body>
