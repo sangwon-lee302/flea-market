@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\CategoryType;
+use App\Category as CategoryEnum;
 use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -17,11 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereName($value)
  *
- * @property CategoryType $slug
  * @property-read Collection<int, Item> $items
  * @property-read int|null $items_count
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereSlug($value)
  *
  * @mixin \Eloquent
  */
@@ -31,7 +28,7 @@ class Category extends Model
     public function casts()
     {
         return [
-            'name' => CategoryType::class,
+            'name' => CategoryEnum::class,
         ];
     }
 }

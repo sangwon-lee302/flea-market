@@ -2,7 +2,7 @@
 
 namespace App;
 
-enum CategoryType: string
+enum Category: string
 {
     case Fashion     = 'fashion';
     case Electronics = 'electronics';
@@ -21,6 +21,6 @@ enum CategoryType: string
 
     public function label(): string
     {
-        return __("enums.condition.{$this->value}");
+        return __("enums.category.{$this->value}");
     }
 }
