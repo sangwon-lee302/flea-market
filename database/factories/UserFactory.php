@@ -32,6 +32,18 @@ class UserFactory extends Factory
     }
 
     /**
+     * Configure the model factory to automatically create a corresponding profile.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->profile()->create([
+                'nickname' => fake()->userName(),
+            ]);
+        });
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

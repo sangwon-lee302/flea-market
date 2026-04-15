@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -37,5 +38,10 @@ use Illuminate\Support\Carbon;
 #[Fillable(['image_path', 'nickname', 'postal_code', 'address', 'building'])]
 class Profile extends Model
 {
-    //
+    protected function imagePath(): Attribute
+    {
+        return Attribute::get(
+            fn (?string $value) => $value ?? 'avatars/default.jpg'
+        );
+    }
 }
