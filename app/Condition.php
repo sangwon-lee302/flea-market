@@ -4,10 +4,10 @@ namespace App;
 
 enum Condition: string
 {
-    case LIKE_NEW = 'like_new';
-    case GOOD     = 'good';
-    case FAIR     = 'fair';
-    case BAD      = 'bad';
+    case LikeNew = 'like_new';
+    case Good    = 'good';
+    case Fair    = 'fair';
+    case Bad     = 'bad';
 
     public function label(): string
     {

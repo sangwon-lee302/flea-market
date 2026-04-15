@@ -4,8 +4,8 @@ namespace App;
 
 enum PaymentMethod: string
 {
-    case CONVENIENCE_STORE = 'convenience_store';
-    case CREDIT_CARD       = 'credit_card';
+    case ConvenienceStore = 'convenience_store';
+    case CreditCard       = 'credit_card';
 
     public function label(): string
     {
