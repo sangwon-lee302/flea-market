@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Condition;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -53,12 +55,21 @@ use Illuminate\Support\Carbon;
 #[Fillable(['image_path', 'condition', 'name', 'brand_name', 'description', 'price'])]
 class Item extends Model
 {
+    use HasFactory;
+
     public function casts()
     {
         return [
             'condition' => Condition::class,
             'is_sold'   => 'boolean',
         ];
+    }
+
+    protected function imagePath(): Attribute
+    {
+        return Attribute::get(
+            fn (?string $value) => $value ?? 'items/default.jpg'
+        );
     }
 
     public function categories(): BelongsToMany
