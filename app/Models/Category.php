@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CategoryType;
+use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
+#[WithoutTimestamps]
 class Category extends Model
 {
     public function casts()

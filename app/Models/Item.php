@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @method static \Database\Factories\ItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item query()
