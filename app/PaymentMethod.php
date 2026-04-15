@@ -4,11 +4,14 @@ namespace App;
 
 enum PaymentMethod: string
 {
-    case ConvenienceStore = 'convenience_store';
-    case CreditCard       = 'credit_card';
+    case ConvenienceStore = 1;
+    case CreditCard       = 2;
 
     public function label(): string
     {
-        return __("enums.payment_method.{$this->value}");
+        return match ($this) {
+            self::ConvenienceStore => __('enums.payment_method.convenience_store'),
+            self::CreditCard       => __('enums.payment_method.credit_card'),
+        };
     }
 }

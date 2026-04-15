@@ -2,15 +2,20 @@
 
 namespace App;
 
-enum Condition: string
+enum Condition: int
 {
-    case LikeNew = 'like_new';
-    case Good    = 'good';
-    case Fair    = 'fair';
-    case Bad     = 'bad';
+    case LikeNew = 1;
+    case Good    = 2;
+    case Fair    = 3;
+    case Bad     = 4;
 
     public function label(): string
     {
-        return __("enums.condition.{$this->value}");
+        return match ($this) {
+            self::LikeNew => __('enums.condition.like_new'),
+            self::Good    => __('enums.condition.good'),
+            self::Fair    => __('enums.condition.fair'),
+            self::Bad     => __('enums.condition.bad'),
+        };
     }
 }
