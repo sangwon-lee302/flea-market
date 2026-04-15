@@ -2,7 +2,7 @@
 
 namespace App;
 
-enum PaymentMethod: string
+enum PaymentMethod: int
 {
     case ConvenienceStore = 1;
     case CreditCard       = 2;
