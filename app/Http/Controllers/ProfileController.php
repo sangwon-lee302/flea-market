@@ -14,10 +14,10 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        if (request('page') === 'sell') {
-            $items = Auth::user()?->items()->get() ?? collect([]);
+        if (request('page') === 'buy') {
+            $items = Auth::user()->orderedItems()->get();
         } else {
-            $items = Auth::user()?->orderedItems()->get() ?? collect([]);
+            $items = Auth::user()->items()->get();
         }
 
         return view('profiles.show', compact('profile', 'items'));

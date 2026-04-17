@@ -8,7 +8,7 @@
 </head>
 <body>
     <header
-        class="flex items-center justify-between bg-black px-4 py-6 text-white"
+        class="sticky top-0 flex items-center justify-between bg-black px-8 py-4 text-white"
     >
         <img src="{{ asset('images/header_logo.png') }}" alt="Company Logo" />
 
@@ -25,12 +25,21 @@
                     <a href="{{ route('login') }}">ログイン</a>
                 @endguest
 
-                <a href="{{ route('profiles.show') }}">マイページ</a>
+                {{-- maybe it would be better to simply hide the mypage link for guests --}}
+                {{-- but i have to meet the specs... --}}
+                <a
+                    href="{{ 
+                        auth()->check()
+                            ? route('profiles.show', ['profile' => auth()->user()->profile, 'page' => 'sell'])
+                            : route('login')
+                    }}"
+                    >マイページ</a
+                >
             </nav>
         @endunless
     </header>
 
-    <main {{ $attributes->twMerge(['class' => 'mx-auto pb-30 min-h-full']) }}
+    <main {{ $attributes->merge(['class' => 'mx-auto pb-30 min-h-full']) }}
         >{{ $slot }}
     </main>
 </body>
