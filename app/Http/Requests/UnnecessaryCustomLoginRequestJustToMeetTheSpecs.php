@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use Laravel\Fortify\Http\Requests\LoginRequest;
 
-class LoginRequest extends FortifyLoginRequest
+class UnnecessaryCustomLoginRequestJustToMeetTheSpecs extends LoginRequest
 {
     /**
      * Determine if the user is authorized to make this request.

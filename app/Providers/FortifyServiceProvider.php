@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Http\Requests\LoginRequest as CustomLoginRequest;
+use App\Http\Requests\UnnecessaryCustomLoginRequestJustToMeetTheSpecs;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -29,7 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
     {
         Fortify::createUsersUsing(CreateNewUser::class);
 
-        $this->app->bind(LoginRequest::class, CustomLoginRequest::class);
+        $this->app->bind(LoginRequest::class, UnnecessaryCustomLoginRequestJustToMeetTheSpecs::class);
 
         Fortify::registerView(function () {
             return view('auth.register');

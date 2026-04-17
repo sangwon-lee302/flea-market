@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UnnecessaryCustomRegisterRequestJustToMeetTheSpecs;
 use App\Models\Profile;
 use App\Models\User;
 use Exception;
@@ -23,7 +23,9 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        Validator::make($input, (new RegisterRequest)->rules())->validate();
+        Validator::make($input,
+            (new UnnecessaryCustomRegisterRequestJustToMeetTheSpecs)->rules()
+        )->validate();
 
         return DB::transaction(function () use ($input) {
             try {
