@@ -14,7 +14,7 @@
 
     <form
         method="{{ $isGet ? 'GET' : 'POST' }}"
-        {{ $attributes->twMerge(['class' => 'mt-12 flex flex-col']) }}
+        {{ $attributes->merge(['class' => 'mt-12 flex flex-col']) }}
     >
         @if (! $isGet)
             @csrf
