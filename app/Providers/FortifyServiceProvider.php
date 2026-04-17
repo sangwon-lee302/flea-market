@@ -19,7 +19,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginRequest::class, UnnecessaryCustomLoginRequestJustToMeetTheSpecs::class);
     }
 
     /**
@@ -28,8 +28,6 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Fortify::createUsersUsing(CreateNewUser::class);
-
-        $this->app->bind(LoginRequest::class, UnnecessaryCustomLoginRequestJustToMeetTheSpecs::class);
 
         Fortify::registerView(function () {
             return view('auth.register');
