@@ -13,9 +13,9 @@
         id="{{ str($field)->kebab() }}"
         name="{{ $field }}"
         value="{{ old($field, $value) }}"
-        {{ $attributes->twMerge(['class' => 'border p-2 rounded-sm border-gray-500']) }}
+        {{ $attributes->merge(['class' => 'p-2 rounded-sm border border-gray-500']) }}
     />
     @error ($field)
-        <div class="text-red-500">{{ $message }}</div>
+        <span class="text-red-500">{{ $message }}</span>
     @enderror
 </div>

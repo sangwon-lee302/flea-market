@@ -1,13 +1,23 @@
-import './bootstrap'
+import './bootstrap';
 
-// is it possible to check the file type before showing preview?
 window.previewImage = function (event) {
-    const output = document.getElementById('preview')
-    const file = event.target.files[0]
+    const file = event.target.files[0];
 
-    if (file && file.type.startsWith('image/')) {
-        output.src = URL.createObjectURL(file)
+    if (!file) return;
 
-        output.onload = () => URL.revokeObjectURL(output.src)
+    const maxSize = 2 * 1024 * 1024;
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    if (!allowedTypes.includes(file.type) || file.size > maxSize) {
+        alert('JPEG/JPG/PNG形式で、2MB以内の画像を選択してください。');
+        event.target.value = '';
+        return;
     }
-}
+
+    const reader = new FileReader();
+    reader.onload = function () {
+        const output = document.getElementById('preview');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+};

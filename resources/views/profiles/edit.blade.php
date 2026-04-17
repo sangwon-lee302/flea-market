@@ -7,20 +7,17 @@
         class="gap-8"
     >
         <div class="flex items-center gap-8">
-            <x-profile-image id="preview" :profile="$profile" />
-            <div>
-                <label for="image" class="cursor-pointer"
-                    >Change Profile Image</label
-                >
-                <input
-                    id="image"
+            <x-profile-image id="preview" :src="$profile->image_path" />
+            <label class="btn btn-secondary"
+                ><input
                     type="file"
                     name="image"
                     accept=".jpeg, .jpg, .png"
                     onchange="previewImage(event)"
                     class="hidden"
                 />
-            </div>
+                <p>画像を選択する</p>
+            </label>
         </div>
         <x-form.input-field field="nickname" :value="$profile->nickname" />
         <x-form.input-field

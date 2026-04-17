@@ -11,3 +11,17 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 }
+
+@layer components {
+    .btn {
+        @apply cursor-pointer px-4 py-2 text-center font-semibold transition-colors;
+    }
+
+    .btn-primary {
+        @apply rounded-sm bg-red-500 text-white hover:bg-red-600 active:bg-red-700;
+    }
+
+    .btn-secondary {
+        @apply rounded-md border border-red-500 text-red-500 hover:border-red-600 hover:text-red-600 active:border-red-700 active:text-red-700;
+    }
+}
