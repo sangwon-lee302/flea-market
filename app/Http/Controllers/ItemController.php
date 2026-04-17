@@ -12,10 +12,12 @@ class ItemController extends Controller
      */
     public function index()
     {
-        if (request('tab') === 'mypage') {
-            $items = Auth::user()?->likedItems()->get() ?? collect([]);
+        if (request('tab') === 'mylist') {
+            $items = Auth::user()?->likedItems()->search(request('keyword'))->get() ?? collect([]);
         } else {
-            $items = Item::when(Auth::check(), fn ($q) => $q->whereNot('user_id', Auth::id()))->get();
+            $items = Item::when(Auth::check(), fn ($q) => $q->whereNot('user_id', Auth::id()))
+                ->search(request('keyword'))
+                ->get();
         }
 
         return view('items.index', compact('items'));

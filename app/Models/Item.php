@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Condition;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,20 +29,21 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  *
  * @method static \Database\Factories\ItemFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereBrandName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereCondition($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereImagePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereIsSold($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereUserId($value)
+ * @method static Builder<static>|Item newModelQuery()
+ * @method static Builder<static>|Item newQuery()
+ * @method static Builder<static>|Item query()
+ * @method static Builder<static>|Item whereBrandName($value)
+ * @method static Builder<static>|Item whereCondition($value)
+ * @method static Builder<static>|Item whereCreatedAt($value)
+ * @method static Builder<static>|Item whereDescription($value)
+ * @method static Builder<static>|Item whereId($value)
+ * @method static Builder<static>|Item whereImagePath($value)
+ * @method static Builder<static>|Item whereIsSold($value)
+ * @method static Builder<static>|Item whereName($value)
+ * @method static Builder<static>|Item wherePrice($value)
+ * @method static Builder<static>|Item whereUpdatedAt($value)
+ * @method static Builder<static>|Item whereUserId($value)
+ * @method static Builder<static>|Item search(?string $keyword)
  *
  * @property-read Collection<int, Category> $categories
  * @property-read int|null $categories_count
@@ -64,6 +67,14 @@ class Item extends Model
             'condition' => Condition::class,
             'is_sold'   => 'boolean',
         ];
+    }
+
+    #[Scope]
+    protected function search(Builder $query, ?string $keyword): void
+    {
+        $query->when($keyword, function ($q) use ($keyword) {
+            $q->where('name', 'like', "%{$keyword}%");
+        });
     }
 
     protected function imagePath(): Attribute

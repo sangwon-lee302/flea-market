@@ -13,6 +13,21 @@
         <img src="{{ asset('images/header_logo.png') }}" alt="Company Logo" />
 
         @unless (request()->routeIs(['login', 'register', 'verification.*']))
+            <form
+                action="{{ route('items.index') }}"
+                method="GET"
+                class="w-[30%]"
+            >
+                <label for="search" class="sr-only">検索する商品名</label>
+                <input
+                    id="search"
+                    type="search"
+                    placeholder="なにをお探しですか？"
+                    name="keyword"
+                    value="{{ request('keyword') }}"
+                    class="w-full rounded-sm bg-white p-2 text-black"
+                />
+            </form>
             <nav class="flex items-center justify-between gap-4">
                 @auth
                     <form action="{{ route('logout') }}" method="POST">
