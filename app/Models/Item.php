@@ -28,22 +28,22 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item newModelQuery()
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item newQuery()
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item query()
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereBrandName($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereCondition($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereCreatedAt($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereDescription($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereId($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereImagePath($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereIsSold($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereName($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item wherePrice($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereUpdatedAt($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item whereUserId($value)
+ * @method static Illuminate\Database\Eloquent\Builder<static>|Item search(?string $keyword)
  * @method static \Database\Factories\ItemFactory factory($count = null, $state = [])
- * @method static Builder<static>|Item newModelQuery()
- * @method static Builder<static>|Item newQuery()
- * @method static Builder<static>|Item query()
- * @method static Builder<static>|Item whereBrandName($value)
- * @method static Builder<static>|Item whereCondition($value)
- * @method static Builder<static>|Item whereCreatedAt($value)
- * @method static Builder<static>|Item whereDescription($value)
- * @method static Builder<static>|Item whereId($value)
- * @method static Builder<static>|Item whereImagePath($value)
- * @method static Builder<static>|Item whereIsSold($value)
- * @method static Builder<static>|Item whereName($value)
- * @method static Builder<static>|Item wherePrice($value)
- * @method static Builder<static>|Item whereUpdatedAt($value)
- * @method static Builder<static>|Item whereUserId($value)
- * @method static Builder<static>|Item search(?string $keyword)
  *
  * @property-read Collection<int, Category> $categories
  * @property-read int|null $categories_count
