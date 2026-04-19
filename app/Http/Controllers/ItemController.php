@@ -22,4 +22,21 @@ class ItemController extends Controller
 
         return view('items.index', compact('items'));
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Item $item)
+    {
+        $item->load(['comments.user.profile']);
+        $item->loadCount(['likes', 'comments']);
+
+        $isLiked = Auth::check()
+            ? Auth::user()->likedItems()->whereItemId($item->id)->exists()
+            : false;
+
+        $categories = $item->categories;
+
+        return view('items.show', compact('item', 'isLiked', 'categories'));
+    }
 }

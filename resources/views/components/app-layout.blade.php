@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>COACHTECH フリマ</title>
     @vite (['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <header
-        class="sticky top-0 flex items-center justify-between bg-black px-8 py-4 text-white"
+        class="sticky top-0 z-50 flex items-center justify-between bg-black px-8 py-4 text-white"
     >
-        <img src="{{ asset('images/header_logo.png') }}" alt="Company Logo" />
+        <a href="{{ route('items.index') }}"
+            ><img
+                src="{{ asset('images/header_logo.png') }}"
+                alt="COACHTECH フリマ"
+                class="h-9"
+        /></a>
 
         @unless (request()->routeIs(['login', 'register', 'verification.*']))
             <form

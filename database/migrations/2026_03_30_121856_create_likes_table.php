@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->unique(['user_id', 'item_id']);
 
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import './bootstrap';
 
 window.previewImage = function (event) {
@@ -20,4 +21,33 @@ window.previewImage = function (event) {
         output.src = reader.result;
     };
     reader.readAsDataURL(file);
+};
+
+window.toggleLike = function (itemId) {
+    const button = event.currentTarget;
+    if (button.disabled) return;
+
+    button.disabled = true;
+
+    const icon = document.getElementById('like-icon');
+    const countSpan = document.getElementById('like-count');
+
+    axios
+        .post(`/likes/${itemId}/toggle`)
+        .then((response) => {
+            const isAttached = response.data.isAttached;
+            const likesCount = response.data.likesCount;
+
+            icon.src = isAttached
+                ? '/images/likes_on.png'
+                : '/images/likes_off.png';
+
+            countSpan.innerText = likesCount;
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+        .finally(() => {
+            button.disabled = false;
+        });
 };
