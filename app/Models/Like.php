@@ -17,10 +17,12 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Like whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Like whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Like whereItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Like whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Like whereUserId($value)
  *
  * @property-read Item $item
  * @property-read User $user
+ * @property Carbon|null $updated_at
  *
  * @mixin \Eloquent
  */
