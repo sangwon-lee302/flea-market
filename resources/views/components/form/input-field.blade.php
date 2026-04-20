@@ -1,6 +1,6 @@
 @props ([
     'field' => '',
-    'value' => null,
+    'value' => '',
 ])
 
 <div class="flex flex-col">

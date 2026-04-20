@@ -1,12 +1,12 @@
 @props ([
     'title' => '',
-    'method' => 'POST',
+    'method' => 'GET',
 ])
 
 @php
     $method = strtoupper($method);
     $isGet = $method === 'GET';
-    $spoofMethod = in_array($method, ['PUT', 'PATCH', 'DELETE']);
+    $shouldSpoofMethod = in_array($method, ['PUT', 'PATCH', 'DELETE']);
 @endphp
 
 <div>
@@ -20,7 +20,7 @@
             @csrf
         @endif
 
-        @if ($spoofMethod)
+        @if ($shouldSpoofMethod)
             @method ($method)
         @endif
 
