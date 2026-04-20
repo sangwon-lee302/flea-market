@@ -12,7 +12,9 @@
         <x-form.button class="mt-16">{{ $buttonText }}</x-form.button>
     </x-form>
 
-    <x-anchor :href="$anchorHref" class="mt-8 block w-fit">
-        {{ $anchorText }}</x-anchor
+    <a
+        href="{{ $anchorHref }}"
+        class="anchor mx-auto mt-8 block w-fit"
+        >{{ $anchorText }}</a
     >
 </x-app-layout>
