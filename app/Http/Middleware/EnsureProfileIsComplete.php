@@ -16,8 +16,14 @@ class EnsureProfileIsComplete
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (empty(Auth::user()->profile->nickname) && ! $request->routeIs('profiles.edit')) {
-            return redirect()->route('profiles.edit', Auth::user()->profile);
+        $profile = Auth::user()->profile;
+
+        $requiredFields = ['nickname', 'postal_code', 'address'];
+
+        $isIncompleteProfile = collect($requiredFields)->contains(fn ($field) => empty($profile->{$field}));
+
+        if ($isIncompleteProfile && ! $request->routeIs('profiles.edit', 'profiles.update')) {
+            return redirect()->guest(route('profiles.edit', ['profile' => $profile]));
         }
 
         return $next($request);
