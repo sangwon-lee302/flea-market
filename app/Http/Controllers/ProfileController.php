@@ -20,7 +20,10 @@ class ProfileController extends Controller
             $items = Auth::user()->items()->get();
         }
 
-        return view('profiles.show', compact('profile', 'items'));
+        return view('profiles.show', [
+            'profile' => $profile,
+            'items'   => $items,
+        ]);
     }
 
     /**
@@ -28,7 +31,9 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        return view('profiles.edit', compact('profile'));
+        return view('profiles.edit', [
+            'profile' => $profile,
+        ]);
     }
 
     /**
@@ -48,6 +53,8 @@ class ProfileController extends Controller
 
         $profile->update($request->except('image'));
 
-        return redirect()->route('profiles.show', compact('profile'));
+        return redirect()->route('profiles.show', [
+            'profile' => $profile,
+        ]);
     }
 }

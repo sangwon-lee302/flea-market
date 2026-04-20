@@ -20,7 +20,9 @@ class ItemController extends Controller
                 ->get();
         }
 
-        return view('items.index', compact('items'));
+        return view('items.index', [
+            'items' => $items,
+        ]);
     }
 
     /**
@@ -37,6 +39,10 @@ class ItemController extends Controller
 
         $categories = $item->categories;
 
-        return view('items.show', compact('item', 'isLiked', 'categories'));
+        return view('items.show', [
+            'item'       => $item,
+            'isLiked'    => $isLiked,
+            'categories' => $categories,
+        ]);
     }
 }

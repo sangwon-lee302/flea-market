@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -11,6 +12,11 @@ class OrderController extends Controller
      */
     public function create(Item $item)
     {
-        return view('orders.create', compact('item'));
+        $profile = Auth::user()->profile;
+
+        return view('orders.create', [
+            'item'    => $item,
+            'profile' => $profile,
+        ]);
     }
 }
