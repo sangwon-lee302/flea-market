@@ -90,7 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function orderedItems(): BelongsToMany
     {
-        return $this->belongsToMany(Item::class, 'orders');
+        return $this->belongsToMany(Item::class, 'orders')->withTimestamps();
     }
 
     public function likedItems(): BelongsToMany
