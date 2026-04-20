@@ -7,7 +7,7 @@
     />
     {{-- item detail --}}
     <div class="flex flex-col p-4">
-        <h1>{{ $item->name }}</h1>
+        <h1 class="text-4xl font-bold">{{ $item->name }}</h1>
         <p class="text-sm">{{ $item->brand_name }}</p>
         <p class="mt-4 text-lg">&yen;<span class="text-3xl">{{ number_format($item->price) }}</span><span class="pl-2 text-xl">(税込)</span></p>
         {{-- likes/comments icons and number --}}
@@ -25,9 +25,9 @@
         <a href="{{ route('orders.create', $item) }}" class="btn btn-primary"
             >購入手続きへ</a
         >
-        <h2 class="py-6">商品説明</h2>
+        <h2 class="py-6 text-2xl font-bold">商品説明</h2>
         <p class="py-2 whitespace-pre-wrap">{{ $item->description }}</p>
-        <h2 class="py-6">商品の情報</h2>
+        <h2 class="py-6 text-2xl font-bold">商品の情報</h2>
         {{-- item categories and condition --}}
         <table>
             <tbody>
@@ -49,7 +49,7 @@
             </tbody>
         </table>
         {{-- comments section --}}
-        <h2 class="py-6 text-gray-600">
+        <h2 class="py-6 text-2xl font-bold text-gray-600">
             コメント({{ $item->comments_count }})
         </h2>
         @foreach ($item->comments as $comment)
