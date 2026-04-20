@@ -6,19 +6,7 @@
         enctype="multipart/form-data"
         class="gap-8"
     >
-        <div class="flex items-center gap-8">
-            <x-profile-image id="preview" :src="$profile->image_path" />
-            <label class="btn btn-secondary"
-                ><input
-                    type="file"
-                    name="image"
-                    accept=".jpeg, .jpg, .png"
-                    onchange="previewImage(event)"
-                    class="hidden"
-                />
-                <p>画像を選択する</p>
-            </label>
-        </div>
+        <x-profile-image-upload-field :src="$profile->image_path" />
         <x-form.input-field field="nickname" :value="$profile->nickname" />
         <x-form.input-field
             field="postal_code"

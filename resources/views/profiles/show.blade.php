@@ -3,7 +3,7 @@
         class="mx-auto flex w-[90%] max-w-5xl items-center justify-between py-15"
     >
         <div class="flex items-center gap-8 lg:gap-24">
-            <x-profile-image :src="$profile->image_path" />
+            <x-profile-image :src="$profile->image_path" class="size-37.5" />
             <p class="text-2xl font-bold">{{ $profile->nickname }}</p>
         </div>
         <a
