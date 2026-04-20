@@ -28,7 +28,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        $item->load('comments.user.profile');
+        $item->load(['comments.user.profile']);
         $item->loadCount(['likes', 'comments']);
 
         $isLiked = Auth::check()
