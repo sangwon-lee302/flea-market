@@ -5,7 +5,7 @@
     <label class="btn btn-secondary"
         ><input
             type="file"
-            name="image"
+            name="avatar"
             accept=".jpeg, .jpg, .png"
             onchange="previewImage(event)"
             class="hidden"

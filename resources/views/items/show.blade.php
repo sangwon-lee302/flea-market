@@ -55,7 +55,7 @@
         @foreach ($item->comments as $comment)
             <div class="flex items-center gap-4 pb-4">
                 <x-profile-image
-                    :src="$comment->user->profile->image_path"
+                    :src="$comment->user->profile->avatar"
                     class="size-12"
                 />
                 <p class="text-2xl font-bold">{{ $comment->user->profile->nickname }}</p>

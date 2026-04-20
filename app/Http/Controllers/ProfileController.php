@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -41,17 +41,11 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        if ($request->hasFile('image')) {
-            if ($profile->image_path) {
-                Storage::disk('public')->delete($profile->image_path);
-            }
+        $validated = $request->validated();
 
-            $path = $request->file('image')->store('avatars', 'public');
+        $profile->updateAvatar($request->file('avatar'));
 
-            $profile->update(['image_path' => $path]);
-        }
-
-        $profile->update($request->except('image'));
+        $profile->update(Arr::except($validated, ['avatar']));
 
         return redirect()->route('profiles.show', [
             'profile' => $profile,

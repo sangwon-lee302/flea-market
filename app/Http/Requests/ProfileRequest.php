@@ -23,7 +23,7 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image'       => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
+            'avatar'      => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
             'nickname'    => ['required', 'string', 'max:20'],
             'postal_code' => ['required', 'string', 'regex:/^\d{3}-\d{4}$/'],
             'address'     => ['required', 'string', 'max:255'],
@@ -34,7 +34,7 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'postal_code.regex' => '郵便番号は半角数字で、ハイフンを含めて入力してください',
+            'postal_code.regex' => '郵便番号はハイフンを含めた半角数字で入力してください',
         ];
     }
 }
