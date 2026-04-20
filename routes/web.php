@@ -5,15 +5,16 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('profile.complete')->name('items.')->group(function () {
+Route::name('items.')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('index');
     Route::get('item/{item}', [ItemController::class, 'show'])->name('show');
 });
 
-Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->group(function () {
+// do not remove verified middleware since it is crucial to meet the specs
+Route::middleware(['auth', 'verified'])->name('profiles.')->group(function () {
     Route::get('mypage/{profile}', [ProfileController::class, 'show'])->name('show');
-    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->withoutMiddleware('profile.complete')->name('edit');
-    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->withoutMiddleware('profile.complete')->name('update');
+    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->name('edit');
+    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->name('update');
 });
 
 Route::middleware(['auth'])->name('likes.')->group(function () {
