@@ -7,7 +7,7 @@
     <title>COACHTECH フリマ</title>
     @vite (['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="h-full">
     <header
         class="sticky top-0 z-50 flex items-center justify-between bg-black px-8 py-4 text-white"
     >
