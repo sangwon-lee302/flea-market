@@ -13,7 +13,7 @@
         {{-- item info --}}
         <div class="flex gap-16 border-b pb-20">
             <img
-                src="{{ asset('storage/'.$item->image_path) }}"
+                src="{{ asset('storage/'.$item->image) }}"
                 alt="商品画像"
                 class="size-50 rounded-xs"
             />

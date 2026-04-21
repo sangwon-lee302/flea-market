@@ -18,7 +18,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int $user_id
- * @property string $image_path
+ * @property string $image
  * @property int $condition
  * @property string $name
  * @property string|null $brand_name
@@ -55,7 +55,7 @@ use Illuminate\Support\Carbon;
  *
  * @mixin \Eloquent
  */
-#[Fillable(['image_path', 'condition', 'name', 'brand_name', 'description', 'price'])]
+#[Fillable(['image', 'condition', 'name', 'brand_name', 'description', 'price'])]
 class Item extends Model
 {
     use HasFactory;

@@ -21,7 +21,7 @@ class ItemFactory extends Factory
     {
         return [
             'user_id'     => User::factory(),
-            'image_path'  => 'items/default.jpg',
+            'image'       => 'items/default.jpg',
             'condition'   => fake()->randomElement(Condition::class)->value,
             'name'        => fake()->word(),
             'brand_name'  => fake()->company(),

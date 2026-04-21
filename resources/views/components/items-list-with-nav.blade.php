@@ -20,7 +20,7 @@
             <div>
                 <div class="relative">
                     <img
-                        src="{{ asset('storage/'.$item->image_path) }}"
+                        src="{{ asset('storage/'.$item->image) }}"
                         alt="商品画像"
                         class="rounded-sm object-cover"
                     />
@@ -35,7 +35,7 @@
         @else
             <a href="{{ route('items.show', $item) }}">
                 <img
-                    src="{{ asset('storage/'.$item->image_path) }}"
+                    src="{{ asset('storage/'.$item->image) }}"
                     alt="商品画像"
                     class="rounded-sm object-cover"
                 />

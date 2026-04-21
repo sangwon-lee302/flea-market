@@ -139,7 +139,7 @@ class ItemSeeder extends Seeder
             }
 
             $item = Item::factory()->recycle(User::all())->create([
-                'image_path'  => $destinationPath,
+                'image'       => $destinationPath,
                 'condition'   => $data['condition'],
                 'name'        => $data['name'],
                 'brand_name'  => $data['brand_name'],

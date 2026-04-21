@@ -1,7 +1,7 @@
 <x-app-layout class="mt-20 grid w-[90%] max-w-7xl grid-cols-1 lg:grid-cols-2">
     {{-- item image --}}
     <img
-        src="{{ asset('storage/'.$item->image_path) }}"
+        src="{{ asset('storage/'.$item->image) }}"
         alt="商品画像"
         class="w-full max-w-100 rounded-xl p-4 lg:sticky lg:top-41 lg:aspect-square"
     />

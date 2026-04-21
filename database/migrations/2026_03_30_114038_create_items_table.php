@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('image_path');
+            $table->string('image');
             $table->unsignedTinyInteger('condition');
             $table->string('name');
             $table->string('brand_name')->nullable();
