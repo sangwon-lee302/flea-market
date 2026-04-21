@@ -27,13 +27,13 @@ class ItemsListWithNav extends Component
     /**
      * Get the route for each navigation link.
      */
-    public function getRoute($routeName, $params = [], $excludingParams = [])
+    public function getRoute($routeName, $params = [])
     {
         // do not change the order of request()->query() and $params below
         // because if both arrays have the same key, the corresponding value for the one in $params has to be prioritized.
         $allParams = array_merge(request()->query(), $params);
 
-        $finalParams = array_diff_key($allParams, array_flip($excludingParams));
+        $finalParams = array_diff_key($allParams, ['keyword' => '']);
 
         return route($routeName, $finalParams);
     }

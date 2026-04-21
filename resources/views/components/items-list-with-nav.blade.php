@@ -7,9 +7,7 @@
     class="flex items-center gap-[4%] border-b-2 border-gray-500 px-[10%] py-2 font-bold text-gray-500"
 >
     @foreach ($links as $label => $route)
-        <a
-            href="{{ $getRoute($route['name'], $route['param'] ?? [], $route['exclude'] ?? []) }}"
-        >
+        <a href="{{ $getRoute($route['name'], $route['param'] ?? []) }}">
             <span
                 @class (['text-red-500' => $isActive($route['name'], $route['param'] ?? [])])
                 >{{ $label }}</span
