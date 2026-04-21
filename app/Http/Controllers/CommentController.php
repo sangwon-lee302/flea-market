@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Item;
-use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -15,7 +14,7 @@ class CommentController extends Controller
     public function store(CommentRequest $request, Item $item)
     {
         $comment = new Comment;
-        $comment->user()->associate(Auth::user());
+        $comment->user()->associate(auth()->user());
         $comment->item()->associate($item);
         $comment->body = $request->validated('body');
 

@@ -1,8 +1,3 @@
-@props ([
-    'items' => [],
-    'links' => [],
-])
-
 <nav
     class="flex items-center gap-[4%] border-b-2 border-gray-500 px-[10%] py-2 font-bold text-gray-500"
 >
@@ -21,7 +16,7 @@
     class="mx-auto mt-12 grid w-[95%] max-w-7xl grid-cols-3 gap-4 lg:grid-cols-4 lg:gap-12"
 >
     @foreach ($items as $item)
-        @if ($item->is_sold)
+        @if ($item->order_exists)
             <div>
                 <div class="relative">
                     <img

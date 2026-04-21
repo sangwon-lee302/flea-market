@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureProfileIsComplete
@@ -16,7 +15,7 @@ class EnsureProfileIsComplete
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $profile = Auth::user()->profile;
+        $profile = auth()->user()->profile;
 
         $requiredFields = ['nickname', 'postal_code', 'address'];
 

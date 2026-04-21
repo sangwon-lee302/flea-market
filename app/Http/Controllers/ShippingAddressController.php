@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShippingAddressRequest;
 use App\Models\Item;
-use Illuminate\Support\Facades\Auth;
 
 class ShippingAddressController extends Controller
 {
@@ -15,7 +14,7 @@ class ShippingAddressController extends Controller
     {
         $addressData = session('temp_address', []);
 
-        $profile = Auth::user()->profile;
+        $profile = auth()->user()->profile;
 
         return view('address.edit', [
             'addressData' => $addressData,

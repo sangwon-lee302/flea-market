@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -13,10 +12,13 @@ class ItemController extends Controller
     public function index()
     {
         if (request('tab') === 'mylist') {
-            $items = Auth::user()?->likedItems()->search(request('keyword'))->get() ?? collect([]);
+            $items = auth()->user()?->likedItems()->search(request('keyword'))
+                ->withExists('order')
+                ->get() ?? collect([]);
         } else {
-            $items = Item::when(Auth::check(), fn ($q) => $q->whereNot('user_id', Auth::id()))
+            $items = Item::when(auth()->check(), fn ($q) => $q->whereNot('user_id', auth()->id()))
                 ->search(request('keyword'))
+                ->withExists('order')
                 ->get();
         }
 
@@ -33,8 +35,8 @@ class ItemController extends Controller
         $item->load(['comments.user.profile']);
         $item->loadCount(['likes', 'comments']);
 
-        $isLiked = Auth::check()
-            ? Auth::user()->likedItems()->whereItemId($item->id)->exists()
+        $isLiked = auth()->check()
+            ? auth()->user()->likedItems()->whereItemId($item->id)->exists()
             : false;
 
         $categories = $item->categories;

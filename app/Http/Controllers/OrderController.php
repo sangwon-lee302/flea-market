@@ -6,7 +6,6 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Item;
 use App\Models\Order;
 use App\PaymentMethod;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -18,7 +17,7 @@ class OrderController extends Controller
         $orderData   = session('order_data', []);
         $addressData = session('temp_address', []);
 
-        $profile = Auth::user()->profile;
+        $profile = auth()->user()->profile;
 
         $paymentMethods = PaymentMethod::jsList();
 
@@ -56,7 +55,7 @@ class OrderController extends Controller
     {
         $orderData = session('order_form_data');
 
-        Order::storeOrder(Auth::user(), $item, $orderData);
+        Order::storeOrder(auth()->user(), $item, $orderData);
 
         session()->forget('order_form_data');
 

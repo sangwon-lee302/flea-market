@@ -101,9 +101,6 @@ class Order extends Model
 
         $order->save();
 
-        $item->is_sold = true;
-        $item->save();
-
         session()->forget('temp_address');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -12,7 +11,7 @@ class LikeController extends Controller
      */
     public function toggle(Item $item)
     {
-        $result = Auth::user()->likedItems()->toggle($item->id);
+        $result = auth()->user()->likedItems()->toggle($item->id);
 
         $isAttached = count($result['attached']) > 0;
 

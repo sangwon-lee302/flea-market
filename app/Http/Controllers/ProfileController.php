@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -15,9 +14,9 @@ class ProfileController extends Controller
     public function show(Profile $profile)
     {
         if (request('page') === 'buy') {
-            $items = Auth::user()->orderedItems()->get();
+            $items = auth()->user()->orderedItems()->withExists('order')->get();
         } else {
-            $items = Auth::user()->items()->get();
+            $items = auth()->user()->items()->withExists('order')->get();
         }
 
         return view('profiles.show', [

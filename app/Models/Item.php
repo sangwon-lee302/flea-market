@@ -24,7 +24,6 @@ use Illuminate\Support\Carbon;
  * @property string|null $brand_name
  * @property string $description
  * @property int $price
- * @property int $is_sold
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -65,7 +64,6 @@ class Item extends Model
     {
         return [
             'condition' => Condition::class,
-            'is_sold'   => 'boolean',
         ];
     }
 

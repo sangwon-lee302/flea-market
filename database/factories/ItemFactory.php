@@ -27,7 +27,6 @@ class ItemFactory extends Factory
             'brand_name'  => fake()->company(),
             'description' => fake()->realText(255),
             'price'       => fake()->numberBetween(1),
-            'is_sold'     => false,
         ];
     }
 }

@@ -8,12 +8,17 @@ use Illuminate\View\Component;
 
 class ItemsListWithNav extends Component
 {
+    public $items;
+
+    public $links;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($items = [], $links = [])
     {
-        //
+        $this->items = $items;
+        $this->links = $links;
     }
 
     /**
@@ -27,13 +32,13 @@ class ItemsListWithNav extends Component
     /**
      * Get the route for each navigation link.
      */
-    public function getRoute($routeName, $params = [])
+    public function getRoute($routeName, $params = [], $excludingParams = [])
     {
         // do not change the order of request()->query() and $params below
         // because if both arrays have the same key, the corresponding value for the one in $params has to be prioritized.
         $allParams = array_merge(request()->query(), $params);
 
-        $finalParams = array_diff_key($allParams, ['keyword' => '']);
+        $finalParams = array_diff_key($allParams, array_flip($excludingParams));
 
         return route($routeName, $finalParams);
     }
