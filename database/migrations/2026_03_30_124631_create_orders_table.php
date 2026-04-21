@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('payment_method');
             $table->char('shipping_postal_code', 8);
             $table->string('shipping_address');
-            $table->string('shipping_building');
+            $table->string('shipping_building')->nullable();
             $table->timestamps();
         });
     }

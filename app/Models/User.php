@@ -88,6 +88,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Item::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function orderedItems(): BelongsToMany
     {
         return $this->belongsToMany(Item::class, 'orders')->withTimestamps();

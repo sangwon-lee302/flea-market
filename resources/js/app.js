@@ -52,4 +52,11 @@ window.toggleLike = function (itemId) {
         });
 };
 
+document.addEventListener('alpine:init', () => {
+    Alpine.store('checkout', {
+        paymentMethod: '',
+        labels: {},
+    });
+});
+
 Alpine.start();

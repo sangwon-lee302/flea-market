@@ -6,7 +6,7 @@
         enctype="multipart/form-data"
         class="gap-8"
     >
-        <x-profile-image-upload-field :src="$profile->avatar" />
+        <x-profile-image.upload-field :src="$profile->avatar" />
         <x-form.input-field field="nickname" :value="$profile->nickname" />
         <x-form.input-field
             field="postal_code"

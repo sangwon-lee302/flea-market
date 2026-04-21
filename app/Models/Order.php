@@ -45,4 +45,33 @@ class Order extends Model
             'payment_method' => PaymentMethod::class,
         ];
     }
+
+    /**
+     * Store a new order in storage.
+     */
+    public static function storeOrder(User $user, Item $item, array $orderData): void
+    {
+        $profile = $user->profile;
+
+        $shippingAddress = session('temp_address', [
+            'postal_code' => $profile->postal_code,
+            'address'     => $profile->address,
+            'building'    => $profile->building,
+        ]);
+
+        $order = $user->orders()->make([
+            'payment_method'       => $orderData['payment_method'],
+            'shipping_postal_code' => $shippingAddress['postal_code'],
+            'shipping_address'     => $shippingAddress['address'],
+            'shipping_building'    => $shippingAddress['building'],
+        ]);
+        $order->item_id = $item->id;
+
+        $order->save();
+
+        $item->is_sold = true;
+        $item->save();
+
+        session()->forget('temp_address');
+    }
 }
