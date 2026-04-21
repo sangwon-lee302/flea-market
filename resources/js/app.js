@@ -51,3 +51,5 @@ window.toggleLike = function (itemId) {
             button.disabled = false;
         });
 };
+
+Alpine.start();
