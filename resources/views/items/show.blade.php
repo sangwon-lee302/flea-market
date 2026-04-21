@@ -31,11 +31,11 @@
         <p class="py-2 whitespace-pre-wrap">{{ $item->description }}</p>
         <h2 class="py-6 text-2xl font-bold">商品の情報</h2>
         {{-- item categories and condition --}}
-        <table>
+        <table class="table-fixed">
             <tbody>
                 <tr>
-                    <th class="pb-6 text-left">カテゴリー</th>
-                    <td class="flex flex-wrap gap-4 pb-6">
+                    <th class="w-1/2 pb-6 text-left">カテゴリー</th>
+                    <td class="flex w-1/2 flex-wrap gap-4 pb-6">
                         @foreach ($categories as $category)
                             <span
                                 class="rounded-full bg-gray-300 px-4 text-black"
@@ -79,6 +79,9 @@
                         class="w-full rounded-sm border-2 border-gray-400 p-2"
                         >{{ old('body') }}</textarea
                     >
+                    @error ('body')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
                 </label>
             @endauth
             <button class="btn btn-primary mt-8">

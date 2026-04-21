@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
-use Illuminate\Support\Arr;
 
 class ProfileController extends Controller
 {
@@ -35,11 +34,11 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        $validated = $request->validated();
+        $validated = $request->safe();
 
         $profile->updateAvatar($request->file('avatar'));
 
-        $profile->update(Arr::except($validated, ['avatar']));
+        $profile->update($validated->except('avatar'));
 
         return redirect()->intended(route('profiles.show', ['profile' => $profile]));
     }
