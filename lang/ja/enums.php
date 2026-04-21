@@ -24,7 +24,7 @@ return [
         'bad'      => '状態が悪い',
     ],
     'payment_method' => [
-        'convenience_store' => 'コンビニ払い',
-        'credit_card'       => 'カード支払い',
+        'konbini' => 'コンビニ払い',
+        'card'    => 'カード支払い',
     ],
 ];

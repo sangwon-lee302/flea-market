@@ -1,5 +1,5 @@
 @props ([
-    'formData' => [],
+    'orderData' => [],
     'paymentMethods' => [],
 ])
 
@@ -14,13 +14,13 @@
             value=""
             disabled
             hidden
-            @selected (! old('payment_method', $formData['payment_method'] ?? null))
+            @selected (! old('payment_method', $orderData['payment_method'] ?? null))
             >選択してください
         </option>
         @foreach ($paymentMethods as $value => $label)
             <option
                 value="{{ $value }}"
-                @selected (old('payment_method', $formData['payment_method'] ?? null) == $value)
+                @selected (old('payment_method', $orderData['payment_method'] ?? null) == $value)
                 >{{ $label }}
             </option>
         @endforeach

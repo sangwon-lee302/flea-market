@@ -25,7 +25,8 @@ Route::middleware(['auth'])->name('likes.')->group(function () {
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('orders.')->group(function () {
     Route::get('purchase/{item}', [OrderController::class, 'create'])->name('create');
-    Route::post('purchase/{item}', [OrderController::class, 'store'])->name('store');
+    Route::post('purchase/{item}', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('purchase/{item}/success', [OrderController::class, 'success'])->name('success');
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('comments.')->group(function () {

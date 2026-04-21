@@ -26,7 +26,7 @@
         <div class="border-b px-12 py-8">
             <h2 class="pb-16 text-xl font-bold">支払い方法</h2>
             <x-orders.payment-method-select
-                :form-data="$formData"
+                :order-data="$orderData"
                 :payment-methods="$paymentMethods"
                 class="ml-30"
             />
@@ -52,7 +52,7 @@
     <div class="flex flex-col">
         <x-orders.order-summary-table :item="$item" />
         <form
-            action="{{ route('orders.store', ['item' => $item]) }}"
+            action="{{ route('orders.checkout', ['item' => $item]) }}"
             id="order_form"
             method="POST"
         >

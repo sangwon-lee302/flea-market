@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function create(Item $item)
     {
-        $formData    = session('order_form_data', []);
+        $orderData   = session('order_data', []);
         $addressData = session('temp_address', []);
 
         $profile = Auth::user()->profile;
@@ -23,7 +23,7 @@ class OrderController extends Controller
         $paymentMethods = PaymentMethod::jsList();
 
         return view('orders.create', [
-            'formData'       => $formData,
+            'orderData'      => $orderData,
             'addressData'    => $addressData,
             'item'           => $item,
             'profile'        => $profile,
@@ -32,9 +32,9 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Redirect to the actual billing page with necessary information.
      */
-    public function store(OrderRequest $request, Item $item)
+    public function checkout(OrderRequest $request, Item $item)
     {
         $validated = $request->validated();
 
@@ -44,7 +44,19 @@ class OrderController extends Controller
             return redirect()->route('shipping_addresses.edit', ['item' => $item]);
         }
 
-        Order::storeOrder(Auth::user(), $item, $validated);
+        $checkout_url = Order::prepareCheckout($item, $validated['payment_method']);
+
+        return redirect($checkout_url);
+    }
+
+    /**
+     * Store a newly created resource in storage after successful checkout.
+     */
+    public function success(Item $item)
+    {
+        $orderData = session('order_form_data');
+
+        Order::storeOrder(Auth::user(), $item, $orderData);
 
         session()->forget('order_form_data');
 

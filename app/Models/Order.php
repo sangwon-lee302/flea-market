@@ -6,6 +6,8 @@ use App\PaymentMethod;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 /**
  * @property int $id
@@ -44,6 +46,36 @@ class Order extends Model
         return [
             'payment_method' => PaymentMethod::class,
         ];
+    }
+
+    /**
+     * Prepare for redirecting to the actual billing page.
+     */
+    public static function prepareCheckout(Item $item, string $paymentMethod): string
+    {
+        $paymentTypes = match (PaymentMethod::from($paymentMethod)) {
+            PaymentMethod::Konbini => ['konbini'],
+            PaymentMethod::Card    => ['card'],
+        };
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $checkout_session = Session::create([
+            'payment_method_types' => $paymentTypes,
+            'line_items'           => [[
+                'price_data' => [
+                    'currency'     => 'jpy',
+                    'product_data' => ['name' => $item->name],
+                    'unit_amount'  => $item->price,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode'        => 'payment',
+            'success_url' => route('orders.success', ['item' => $item]),
+            'cancel_url'  => route('orders.create', ['item' => $item]),
+        ]);
+
+        return $checkout_session->url;
     }
 
     /**
