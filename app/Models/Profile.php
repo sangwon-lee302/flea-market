@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Storage;
 class Profile extends Model
 {
     /**
-     * Retrieve an avatar of a resource.
+     * Retrieve an avatar image path of a profile.
      *
      * If avatar is null, return default avatar image path.
      *
@@ -55,7 +55,7 @@ class Profile extends Model
     }
 
     /**
-     * Update a resource's avatar.
+     * Update a profile avatar.
      */
     public function updateAvatar(?UploadedFile $file): void
     {
