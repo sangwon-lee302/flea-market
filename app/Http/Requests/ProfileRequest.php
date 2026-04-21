@@ -34,7 +34,7 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'postal_code.regex' => '郵便番号はハイフンを含めた半角数字で入力してください',
+            'postal_code.regex' => '郵便番号はハイフンを含め、半角数字7桁で入力してください',
         ];
     }
 }
