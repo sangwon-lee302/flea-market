@@ -85,7 +85,7 @@ class Order extends Model
     {
         $profile = $user->profile;
 
-        $shippingAddress = session('temp_address', [
+        $shippingAddress = session('shipping_address', [
             'postal_code' => $profile->postal_code,
             'address'     => $profile->address,
             'building'    => $profile->building,
@@ -101,6 +101,6 @@ class Order extends Model
 
         $order->save();
 
-        session()->forget('temp_address');
+        session()->forget('shipping_address');
     }
 }

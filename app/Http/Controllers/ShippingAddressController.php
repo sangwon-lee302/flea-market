@@ -12,14 +12,14 @@ class ShippingAddressController extends Controller
      */
     public function editSession(Item $item)
     {
-        $addressData = session('temp_address', []);
+        $shippingAddress = session('shipping_address', []);
 
         $profile = auth()->user()->profile;
 
         return view('address.edit', [
-            'addressData' => $addressData,
-            'item'        => $item,
-            'profile'     => $profile,
+            'shippingAddress' => $shippingAddress,
+            'item'            => $item,
+            'profile'         => $profile,
         ]);
     }
 
@@ -30,7 +30,7 @@ class ShippingAddressController extends Controller
     {
         $validated = $request->validated();
 
-        session(['temp_address' => $validated]);
+        session(['shipping_address' => $validated]);
 
         return redirect()->route('orders.create', ['item' => $item]);
     }

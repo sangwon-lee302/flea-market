@@ -7,15 +7,15 @@
     >
         <x-form.input-field
             field="postal_code"
-            :value="old('postal_code', $addressData['postal_code'] ?? $profile->postal_code)"
+            :value="$shippingAddress['postal_code'] ?? $profile->postal_code"
         />
         <x-form.input-field
             field="address"
-            :value="old('address', $addressData['address'] ?? $profile->address)"
+            :value="$shippingAddress['address'] ?? $profile->address"
         />
         <x-form.input-field
             field="building"
-            :value="old('building', $addressData['building'] ?? $profile->building)"
+            :value="$shippingAddress['building'] ?? $profile->building"
         />
         <x-form.button class="btn btn-primary mt-8">更新する</x-form.button>
     </x-form>

@@ -44,8 +44,8 @@
                     変更する
                 </button>
             </div>
-            <p class="text-lg font-semibold">&#12306; {{ $addressData['postal_code'] ?? $profile->postal_code }}</p>
-            <p class="text-lg font-semibold">{{ $addressData['address'] ?? $profile->address }}{{ $addressData['building'] ?? $profile->building }}</p>
+            <p class="text-lg font-semibold">&#12306; {{ $shippingAddress['postal_code'] ?? $profile->postal_code }}</p>
+            <p class="text-lg font-semibold">{{ $shippingAddress['address'] ?? $profile->address }}{{ $shippingAddress['building'] ?? $profile->building }}</p>
         </div>
     </div>
     {{-- order summary & submit section --}}

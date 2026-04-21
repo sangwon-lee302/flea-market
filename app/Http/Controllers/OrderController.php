@@ -14,19 +14,20 @@ class OrderController extends Controller
      */
     public function create(Item $item)
     {
-        $orderData   = session('order_data', []);
-        $addressData = session('temp_address', []);
+        $orderData = session('order_data', []);
+
+        $shippingAddress = session('shipping_address', []);
 
         $profile = auth()->user()->profile;
 
         $paymentMethods = PaymentMethod::jsList();
 
         return view('orders.create', [
-            'orderData'      => $orderData,
-            'addressData'    => $addressData,
-            'item'           => $item,
-            'profile'        => $profile,
-            'paymentMethods' => $paymentMethods,
+            'orderData'       => $orderData,
+            'shippingAddress' => $shippingAddress,
+            'item'            => $item,
+            'profile'         => $profile,
+            'paymentMethods'  => $paymentMethods,
         ]);
     }
 
