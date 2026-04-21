@@ -19,7 +19,7 @@
     class="mx-auto mt-12 grid w-[95%] max-w-7xl grid-cols-3 gap-4 lg:grid-cols-4 lg:gap-12"
 >
     @foreach ($items as $item)
-        <a href="{{ route('items.show', $item) }}">
+        <a href="{{ route('items.show', ['item' => $item]) }}">
             <div class="relative">
                 <img
                     src="{{ asset('storage/'.$item->image_path) }}"

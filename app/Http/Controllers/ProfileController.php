@@ -47,8 +47,6 @@ class ProfileController extends Controller
 
         $profile->update(Arr::except($validated, ['avatar']));
 
-        return redirect()->intended(route('profiles.show', [
-            'profile' => $profile,
-        ]));
+        return redirect()->intended(route('profiles.show', ['profile' => $profile]));
     }
 }

@@ -1,7 +1,7 @@
 <x-app-layout class="w-[75%] max-w-2xl pt-30">
     <x-form
         title="プロフィール設定"
-        action="{{ route('profiles.update', $profile) }}"
+        action="{{ route('profiles.update', ['profile' => $profile]) }}"
         method="PATCH"
         enctype="multipart/form-data"
         class="gap-8"

@@ -7,7 +7,7 @@
             <p class="text-2xl font-bold">{{ $profile->nickname }}</p>
         </div>
         <a
-            href="{{ route('profiles.edit', $profile) }}"
+            href="{{ route('profiles.edit', ['profile' => $profile]) }}"
             class="btn btn-secondary"
             >プロフィールを編集</a
         >

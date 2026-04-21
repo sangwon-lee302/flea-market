@@ -22,7 +22,9 @@
                 <span class="font-semibold">{{ $item->comments_count }}</span>
             </div>
         </div>
-        <a href="{{ route('orders.create', $item) }}" class="btn btn-primary"
+        <a
+            href="{{ route('orders.create', ['item' => $item]) }}"
+            class="btn btn-primary"
             >購入手続きへ</a
         >
         <h2 class="py-6 text-2xl font-bold">商品説明</h2>
@@ -64,7 +66,7 @@
         @endforeach
         {{-- comments creation section --}}
         <form
-            action="{{ route('comments.store', $item) }}"
+            action="{{ route('comments.store', ['item' => $item]) }}"
             method="POST"
             class="flex flex-col"
         >
