@@ -17,9 +17,6 @@ class LikeController extends Controller
 
         $likesCount = $item->likes()->count();
 
-        return response()->json([
-            'isAttached' => $isAttached,
-            'likesCount' => $likesCount,
-        ]);
+        return response()->json(['isAttached' => $isAttached, 'likesCount' => $likesCount]);
     }
 }

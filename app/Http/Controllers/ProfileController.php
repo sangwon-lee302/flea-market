@@ -19,10 +19,7 @@ class ProfileController extends Controller
             $items = auth()->user()->items()->withExists('order')->get();
         }
 
-        return view('profiles.show', [
-            'profile' => $profile,
-            'items'   => $items,
-        ]);
+        return view('profiles.show', ['profile' => $profile, 'items' => $items]);
     }
 
     /**
@@ -30,9 +27,7 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        return view('profiles.edit', [
-            'profile' => $profile,
-        ]);
+        return view('profiles.edit', ['profile' => $profile]);
     }
 
     /**

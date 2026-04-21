@@ -22,9 +22,7 @@ class ItemController extends Controller
                 ->get();
         }
 
-        return view('items.index', [
-            'items' => $items,
-        ]);
+        return view('items.index', ['items' => $items]);
     }
 
     /**
