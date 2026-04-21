@@ -230,6 +230,7 @@ return [
         'number'                   => '番号',
         'password'                 => 'パスワード',
         'password_confirmation'    => '確認用パスワード',
+        'payment_method'           => '支払い方法',
         'phone'                    => '電話番号',
         'photo'                    => '写真',
         'portfolio'                => 'ポートフォリオ',

@@ -25,6 +25,6 @@ return [
     ],
     'payment_method' => [
         'convenience_store' => 'コンビニ払い',
-        'credit_card'       => 'カード払い',
+        'credit_card'       => 'カード支払い',
     ],
 ];
