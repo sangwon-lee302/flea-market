@@ -70,16 +70,20 @@
             method="POST"
             class="flex flex-col"
         >
-            <label>
-                <p class="pb-2 text-xl font-bold">商品へのコメント</p>
-                <textarea
-                    name="body"
-                    rows="10"
-                    class="w-full rounded-sm border-2 border-gray-400 p-2"
-                    >{{ old('body') }}</textarea
-                >
-            </label>
-            <button class="btn btn-primary mt-8">コメントを送信する</button>
+            @auth
+                <label>
+                    <p class="pb-2 text-xl font-bold">商品へのコメント</p>
+                    <textarea
+                        name="body"
+                        rows="10"
+                        class="w-full rounded-sm border-2 border-gray-400 p-2"
+                        >{{ old('body') }}</textarea
+                    >
+                </label>
+            @endauth
+            <button class="btn btn-primary mt-8">
+                {{ auth()->check() ? 'コメントを送信する' : 'ログインしてコメントを入力'}}
+            </button>
         </form>
     </div>
 </x-app-layout>
