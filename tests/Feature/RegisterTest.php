@@ -40,4 +40,20 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route('register'));
         $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
     }
+
+    public function test_user_cannot_register_with_empty_password(): void
+    {
+        $response = $this->get(route('register'));
+        $response->assertOk();
+
+        $response = $this->post(route('register.store'), [
+            'name'                  => 'taro yamada',
+            'email'                 => 'test@example.com',
+            'password'              => '',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertRedirect(route('register'));
+        $response->assertInvalid(['password' => 'パスワードを入力してください']);
+    }
 }
