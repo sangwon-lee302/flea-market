@@ -7,12 +7,14 @@ use App\Condition;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;
+use Database\Seeders\Traits\HasImageSeeder;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ItemSeeder extends Seeder
 {
+    use HasImageSeeder;
+
     /**
      * Run the database seeds.
      */
@@ -119,27 +121,22 @@ class ItemSeeder extends Seeder
             ],
         ];
 
-        $this->seedItems($items);
+        $this->seed($items);
     }
 
-    protected function seedItems(array $items): void
+    protected function seed(array $items): void
     {
-        $directoryName = 'items';
+        $subDir = 'images';
 
-        Storage::disk('public')->deleteDirectory($directoryName);
-        Storage::disk('public')->makeDirectory($directoryName);
+        Storage::disk('public')->makeDirectory($subDir);
+
+        $this->copyImageToStorage('default-item-image.jpg', $subDir);
 
         foreach ($items as $data) {
-            $imageName       = $data['image_name'] ?? 'default.jpg';
-            $sourcePath      = database_path("seeders/images/{$imageName}");
-            $destinationPath = "{$directoryName}/{$imageName}";
-
-            if (File::exists($sourcePath)) {
-                Storage::disk('public')->put($destinationPath, File::get($sourcePath));
-            }
+            $destPath = $this->copyImageToStorage($data['image_name'], $subDir);
 
             $item = Item::factory()->recycle(User::all())->create([
-                'image'       => $destinationPath,
+                'image'       => $destPath,
                 'condition'   => $data['condition'],
                 'name'        => $data['name'],
                 'brand_name'  => $data['brand_name'],

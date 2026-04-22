@@ -19,8 +19,21 @@ enum Category: string
     case Toys        = 'toys';
     case BabiesKids  = 'babies_kids';
 
+    /**
+     * Return a corresponding label for each case.
+     */
     public function label(): string
     {
         return __("enums.category.{$this->value}");
+    }
+
+    /**
+     * Return an array whose keys are backed values and values are labels.
+     */
+    public static function jsList(): array
+    {
+        return collect(self::cases())->mapWithKeys(fn ($case) => [
+            $case->value => $case->label(),
+        ])->all();
     }
 }

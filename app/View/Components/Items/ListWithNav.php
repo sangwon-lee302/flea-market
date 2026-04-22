@@ -1,12 +1,13 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Items;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
-class ItemsListWithNav extends Component
+class ListWithNav extends Component
 {
     public $items;
 
@@ -15,7 +16,7 @@ class ItemsListWithNav extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($items = [], $links = [])
+    public function __construct(array|Collection $items = [], array $links = [])
     {
         $this->items = $items;
         $this->links = $links;
@@ -26,7 +27,7 @@ class ItemsListWithNav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.items-list-with-nav');
+        return view('components.items.list-with-nav');
     }
 
     /**

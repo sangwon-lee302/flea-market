@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::name('items.')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('index');
     Route::get('item/{item}', [ItemController::class, 'show'])->name('show');
+    Route::get('sell', [ItemController::class, 'create'])->middleware(['auth', 'verified', 'profile.complete'])->name('create');
+    Route::post('sell', [ItemController::class, 'store'])->middleware(['auth', 'verified', 'profile.complete'])->name('store');
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->group(function () {
@@ -34,6 +36,6 @@ Route::middleware(['auth', 'verified', 'profile.complete'])->name('comments.')->
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('shipping_addresses.')->group(function () {
-    Route::get('purchase/address/{item}', [ShippingAddressController::class, 'editSession'])->name('edit');
-    Route::post('purchase/address/{item}', [ShippingAddressController::class, 'updateSession'])->name('update');
+    Route::post('purchase/address/{item}', [ShippingAddressController::class, 'editSession'])->name('edit');
+    Route::post('purchase/address/{item}/update', [ShippingAddressController::class, 'updateSession'])->name('update');
 });

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShippingAddressRequest;
 use App\Models\Item;
+use Illuminate\Http\Request;
 
 class ShippingAddressController extends Controller
 {
     /**
      * Show the form for editing a shipping address.
      */
-    public function editSession(Item $item)
+    public function editSession(Request $request, Item $item)
     {
+        session(['order_data' => $request->all()]);
+
         $shippingAddress = session('shipping_address', []);
 
         $profile = auth()->user()->profile;

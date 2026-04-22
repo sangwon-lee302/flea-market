@@ -1,5 +1,5 @@
 <x-app-layout class="mt-8">
-    <x-items-list-with-nav
+    <x-items.list-with-nav
         :items="$items"
         :links="[
             'おすすめ'   => ['name' => 'items.index', 'exclude' => ['tab']],

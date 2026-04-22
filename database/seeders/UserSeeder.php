@@ -3,29 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Traits\HasImageSeeder;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserSeeder extends Seeder
 {
+    use HasImageSeeder;
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $directoryName = 'avatars';
+        $subDir = 'avatars';
 
-        Storage::disk('public')->deleteDirectory($directoryName);
-        Storage::disk('public')->makeDirectory($directoryName);
+        Storage::disk('public')->deleteDirectory($subDir);
+        Storage::disk('public')->makeDirectory($subDir);
 
-        $sourcePath      = database_path('seeders/images/default.jpg');
-        $destinationPath = "{$directoryName}/default.jpg";
-
-        if (File::exists($sourcePath)) {
-            Storage::disk('public')->put($destinationPath, File::get($sourcePath));
-        }
+        $this->copyImageToStorage('default-avatar.jpg', $subDir);
 
         User::factory(5)->create();
 

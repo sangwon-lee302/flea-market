@@ -22,7 +22,7 @@
                     <img
                         src="{{ asset('storage/'.$item->image) }}"
                         alt="商品画像"
-                        class="rounded-sm object-cover"
+                        class="aspect-square w-full rounded-sm object-cover"
                     />
                     <div
                         class="absolute inset-0 flex items-center justify-center bg-gray-600/50 text-2xl text-white"
@@ -37,7 +37,7 @@
                 <img
                     src="{{ asset('storage/'.$item->image) }}"
                     alt="商品画像"
-                    class="rounded-sm object-cover"
+                    class="aspect-square w-full rounded-sm object-cover"
                 />
                 <p>{{ $item->name }}</p>
             </a>

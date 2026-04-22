@@ -7,6 +7,30 @@ parameters:
 			path: app/Http/Controllers/ItemController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ItemService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:categories\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/ItemService.php
+
+		-
+			message: '#^Method App\\Services\\ItemService\:\:storeItem\(\) should return App\\Models\\Item but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/ItemService.php
+
+		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
 			identifier: method.alreadyNarrowedType
 			count: 1

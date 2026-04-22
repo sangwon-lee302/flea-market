@@ -12,7 +12,7 @@
             >プロフィールを編集</a
         >
     </div>
-    <x-items-list-with-nav
+    <x-items.list-with-nav
         :items="$items"
         :links="[
             '出品した商品' => ['name' => 'profiles.show', 'param' => ['profile' => $profile, 'page' => 'sell']],

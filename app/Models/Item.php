@@ -30,6 +30,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Item search(?string $keyword)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereBrandName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereCondition($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereCreatedAt($value)
@@ -41,11 +42,11 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Item whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Item search(?string $keyword)
  * @method static \Database\Factories\ItemFactory factory($count = null, $state = [])
  *
  * @property-read Collection<int, Category> $categories
  * @property-read int|null $categories_count
+ * @property-read string $image
  * @property-read Collection<int, Like> $likes
  * @property-read int|null $likes_count
  * @property-read Order|null $order
@@ -75,10 +76,10 @@ class Item extends Model
         });
     }
 
-    protected function imagePath(): Attribute
+    protected function image(): Attribute
     {
         return Attribute::get(
-            fn (?string $value) => $value ?? 'items/default.jpg'
+            fn (?string $value) => $value ?? 'images/default-item-image.jpg'
         );
     }
 

@@ -1,11 +1,12 @@
 <template id="payment-methods-data" hidden>@json ($paymentMethods)</template>
 <x-app-layout
     x-data
-    x-init="
-        $store.checkout.labels = JSON.parse(
+    x-init="$store.checkout.initData({
+        paymentMethod: '{{ old('payment_method', $orderData['payment_method'] ?? '') }}',
+        labels: JSON.parse(
             document.getElementById('payment-methods-data').innerHTML,
         )
-    "
+    })"
     class="grid w-[90%] max-w-7xl grid-cols-1 gap-12 pt-25 lg:grid-cols-2"
 >
     {{-- order detail section --}}
@@ -37,8 +38,7 @@
                 <h2 class="text-xl font-bold">配送先</h2>
                 <button
                     form="order_form"
-                    name="action"
-                    value="edit_shipping_address"
+                    formaction="{{ route('shipping_addresses.edit', $item) }}"
                     class="anchor"
                 >
                     変更する

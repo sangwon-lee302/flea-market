@@ -50,7 +50,7 @@ class Profile extends Model
     protected function avatar(): Attribute
     {
         return Attribute::get(
-            fn (?string $value) => $value ?? 'avatars/default.jpg'
+            fn (?string $value) => $value ?? 'avatars/default-avatar.jpg'
         );
     }
 

@@ -17,8 +17,8 @@ window.previewImage = function (event) {
 
     const reader = new FileReader();
     reader.onload = function () {
-        const output = document.getElementById('preview');
-        output.src = reader.result;
+        const preview = document.getElementById('preview');
+        preview.src = reader.result;
     };
     reader.readAsDataURL(file);
 };
@@ -56,6 +56,11 @@ document.addEventListener('alpine:init', () => {
     Alpine.store('checkout', {
         paymentMethod: '',
         labels: {},
+
+        initData(data) {
+            if (data.paymentMethod) this.paymentMethod = data.paymentMethod;
+            if (data.labels) this.labels = data.labels;
+        },
     });
 });
 

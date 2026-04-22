@@ -9,6 +9,9 @@ enum Condition: int
     case Fair    = 3;
     case Bad     = 4;
 
+    /**
+     * Return a corresponding label for each case.
+     */
     public function label(): string
     {
         return match ($this) {
@@ -17,5 +20,15 @@ enum Condition: int
             self::Fair    => __('enums.condition.fair'),
             self::Bad     => __('enums.condition.bad'),
         };
+    }
+
+    /**
+     * Return an array whose keys are backed values and values are labels.
+     */
+    public static function jsList(): array
+    {
+        return collect(self::cases())->mapWithKeys(fn ($case) => [
+            $case->value => $case->label(),
+        ])->all();
     }
 }

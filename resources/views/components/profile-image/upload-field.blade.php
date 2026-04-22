@@ -9,7 +9,7 @@
                 name="avatar"
                 accept=".jpeg, .jpg, .png"
                 onchange="previewImage(event)"
-                class="hidden"
+                hidden
             />
             <p>画像を選択する</p>
         </label>

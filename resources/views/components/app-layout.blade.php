@@ -34,7 +34,7 @@
                     class="w-full rounded-sm bg-white p-2 text-black"
                 />
             </form>
-            <nav class="flex items-center justify-between gap-4">
+            <nav class="flex items-center justify-between gap-6">
                 @auth
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -55,6 +55,11 @@
                             : route('login')
                     }}"
                     >マイページ</a
+                >
+                <a
+                    href="{{ route('items.create') }}"
+                    class="cursor-pointer rounded-xs bg-white px-4 py-1 text-black"
+                    >出品</a
                 >
             </nav>
         @endunless

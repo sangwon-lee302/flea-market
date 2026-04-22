@@ -38,11 +38,9 @@ class OrderController extends Controller
     {
         $validated = $request->validated();
 
-        session(['order_form_data' => $validated]);
+        session(['validated_order_data' => $validated]);
 
-        if ($request->action === 'edit_shipping_address') {
-            return redirect()->route('shipping_addresses.edit', ['item' => $item]);
-        }
+        session()->forget('order_data');
 
         $checkout_url = Order::prepareCheckout($item, $validated['payment_method']);
 
@@ -54,11 +52,11 @@ class OrderController extends Controller
      */
     public function success(Item $item)
     {
-        $orderData = session('order_form_data');
+        $orderData = session('validated_order_data');
 
         Order::storeOrder(auth()->user(), $item, $orderData);
 
-        session()->forget('order_form_data');
+        session()->forget('validated_order_data');
 
         return redirect()->route('items.index');
     }
