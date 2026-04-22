@@ -8,11 +8,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShippingAddressController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('items.')->group(function () {
+Route::middleware('profile.complete')->name('items.')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('index');
     Route::get('item/{item}', [ItemController::class, 'show'])->name('show');
-    Route::get('sell', [ItemController::class, 'create'])->middleware(['auth', 'verified', 'profile.complete'])->name('create');
-    Route::post('sell', [ItemController::class, 'store'])->middleware(['auth', 'verified', 'profile.complete'])->name('store');
+    Route::get('sell', [ItemController::class, 'create'])->middleware(['auth', 'verified'])->name('create');
+    Route::post('sell', [ItemController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->group(function () {
@@ -21,7 +21,7 @@ Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->
     Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->withoutMiddleware(['profile.complete'])->name('update');
 });
 
-Route::middleware(['auth'])->name('likes.')->group(function () {
+Route::middleware(['auth', 'profile.complete'])->name('likes.')->group(function () {
     Route::post('likes/{item}/toggle', [LikeController::class, 'toggle'])->name('toggle');
 });
 

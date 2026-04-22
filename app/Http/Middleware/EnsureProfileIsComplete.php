@@ -21,7 +21,7 @@ class EnsureProfileIsComplete
 
         $isIncompleteProfile = collect($requiredFields)->contains(fn ($field) => empty($profile->{$field}));
 
-        if ($isIncompleteProfile && ! $request->routeIs('profiles.edit', 'profiles.update')) {
+        if (auth()->check() && $isIncompleteProfile && ! $request->routeIs('profiles.edit', 'profiles.update')) {
             return redirect()->guest(route('profiles.edit', ['profile' => $profile]));
         }
 
