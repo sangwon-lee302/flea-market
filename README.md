@@ -14,6 +14,7 @@
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
 - `sail npm i && sail npm run dev`
+- ホスト側のOSに直接`Node.js`をインストールする(lint-stagedを使用するのため)
 
 ## 使用技術
 
