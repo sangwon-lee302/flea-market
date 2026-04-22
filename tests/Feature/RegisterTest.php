@@ -3,9 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -94,6 +95,12 @@ class RegisterTest extends TestCase
 
     public function test_user_can_register_with_valid_input(): void
     {
+        // mark the user's email as verified as soon as user registration event is triggered in order to skip verification processes in this test
+        // verification processes will be tested elsewhere
+        Event::listen(Registered::class, function ($event) {
+            $event->user->markEmailAsVerified();
+        });
+
         $response = $this->get('/register');
         $response->assertOk();
 
@@ -110,22 +117,12 @@ class RegisterTest extends TestCase
         ]);
         $user = User::whereEmail('test@example.com')->first();
         $this->assertTrue(Hash::check('password', $user->password));
+        // check if a corresponding profile resource was created for the new user
         $this->assertNotNull($user->profile);
 
         $this->assertAuthenticatedAs($user);
 
-        $this->assertEquals(url('/email/verify'), request()->url());
+        $this->assertEquals(url('/mypage/profile/'.$user->profile->id), request()->url());
         $response->assertOk();
-
-        $verificationURL = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinute(60),
-            ['id' => $user->id, 'hash' => sha1($user->email)]
-        );
-        $response = $this->get($verificationURL);
-
-        $response->assertRedirect('/mypage/profile/'.$user->profile->id);
-
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
     }
 }
