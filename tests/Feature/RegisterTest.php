@@ -72,4 +72,20 @@ class RegisterTest extends TestCase
         $response->assertRedirect(route('register'));
         $response->assertInvalid(['password' => 'パスワードは8文字以上で入力してください']);
     }
+
+    public function test_user_cannot_register_with_unconfirmed_password(): void
+    {
+        $response = $this->get(route('register'));
+        $response->assertOk();
+
+        $response = $this->post(route('register.store'), [
+            'name'                  => 'taro yamada',
+            'email'                 => 'test@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'different-password',
+        ]);
+
+        $response->assertRedirect(route('register'));
+        $response->assertInvalid(['password' => 'パスワードと一致しません']);
+    }
 }
