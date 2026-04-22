@@ -9,10 +9,7 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     */
-    public function test_user_cannot_register_with_invalid_name(): void
+    public function test_user_cannot_register_with_empty_name(): void
     {
         $response = $this->get(route('register'));
         $response->assertOk();
@@ -26,5 +23,21 @@ class RegisterTest extends TestCase
 
         $response->assertRedirect(route('register'));
         $response->assertInvalid(['name' => 'お名前を入力してください']);
+    }
+
+    public function test_user_cannot_register_with_empty_email(): void
+    {
+        $response = $this->get(route('register'));
+        $response->assertOk();
+
+        $response = $this->post(route('register.store'), [
+            'name'                  => 'taro yamada',
+            'email'                 => '',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertRedirect(route('register'));
+        $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
     }
 }
