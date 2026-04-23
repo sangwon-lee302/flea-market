@@ -23,8 +23,9 @@ class LoginTest extends TestCase
         ]);
 
         $this->assertGuest();
+
         $response->assertRedirect('/login');
-        $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
+        $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
     }
 
     public function test_user_cannot_login_with_empty_password(): void
@@ -40,7 +41,8 @@ class LoginTest extends TestCase
         ]);
 
         $this->assertGuest();
+
         $response->assertRedirect('/login');
-        $response->assertInvalid(['password' => 'パスワードを入力してください']);
+        $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
     }
 }

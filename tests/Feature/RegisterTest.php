@@ -32,7 +32,7 @@ class RegisterTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect('/register');
-        $response->assertInvalid(['name' => 'お名前を入力してください']);
+        $response->assertSessionHasErrors(['name' => 'お名前を入力してください']);
     }
 
     public function test_user_cannot_register_with_empty_email(): void
@@ -55,7 +55,7 @@ class RegisterTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect('/register');
-        $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
+        $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
     }
 
     public function test_user_cannot_register_with_empty_password(): void
@@ -77,7 +77,7 @@ class RegisterTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect('/register');
-        $response->assertInvalid(['password' => 'パスワードを入力してください']);
+        $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
     }
 
     public function test_user_cannot_register_with_short_password(): void
@@ -100,7 +100,7 @@ class RegisterTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect('/register');
-        $response->assertInvalid(['password' => 'パスワードは8文字以上で入力してください']);
+        $response->assertSessionHasErrors(['password' => 'パスワードは8文字以上で入力してください']);
     }
 
     public function test_user_cannot_register_with_unconfirmed_password(): void
@@ -122,7 +122,7 @@ class RegisterTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect('/register');
-        $response->assertInvalid(['password_confirmation' => 'パスワードと一致しません']);
+        $response->assertSessionHasErrors(['password_confirmation' => 'パスワードと一致しません']);
     }
 
     public function test_user_can_register_with_valid_input(): void

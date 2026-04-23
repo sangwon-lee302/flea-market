@@ -140,7 +140,7 @@ return [
     'required_with_all'      => ':valuesが全て指定されている場合、:attributeは必須項目です。',
     'required_without'       => ':valuesが入力されていない場合、:attributeは必須項目です。',
     'required_without_all'   => ':valuesが全て指定されていない場合、:attributeを指定してください。',
-    'same'                   => ':otherと一致しません。',
+    'same'                   => ':otherと一致しません',
     'size'                   => [
         'array'   => ':attributeの項目数は、:size個にしてください。',
         'file'    => ':attributeには、:size KBのファイルを指定してください。',
