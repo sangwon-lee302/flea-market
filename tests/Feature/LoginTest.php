@@ -60,4 +60,20 @@ class LoginTest extends TestCase
         $response->assertRedirect('/login');
         $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
+
+    public function test_user_can_login_with_valid_credentials(): void
+    {
+        $user = User::factory()->create();
+
+        $this->get('/login')->assertOk();
+
+        $response = $this->post('/login', [
+            'email'    => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticatedAs($user);
+
+        $response->assertRedirect('/');
+    }
 }
