@@ -60,8 +60,7 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_empty_password(): void
     {
-        $user     = User::factory()->make();
-        $password = 'password123';
+        $user = User::factory()->make();
 
         $response = $this->get('/register');
         $response->assertOk();
@@ -70,7 +69,7 @@ class RegisterTest extends TestCase
             'name'                  => $user->name,
             'email'                 => $user->email,
             'password'              => '',
-            'password_confirmation' => $password,
+            'password_confirmation' => 'password',
         ]);
 
         $this->assertDatabaseMissing('users', ['email' => $user->email]);
