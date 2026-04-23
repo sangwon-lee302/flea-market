@@ -15,8 +15,11 @@ class EnsureProfileIsComplete
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $profile = auth()->user()->profile;
+        if (! auth()->check()) {
+            return $next($request);
+        }
 
+        $profile        = auth()->user()->profile;
         $requiredFields = ['nickname', 'postal_code', 'address'];
 
         $isIncompleteProfile = collect($requiredFields)->contains(fn ($field) => empty($profile->{$field}));
