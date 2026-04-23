@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -15,15 +14,22 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_empty_name(): void
     {
+        $user     = User::factory()->make();
+        $password = 'password123';
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => '',
-            'email'                 => 'test@example.com',
-            'password'              => 'password',
-            'password_confirmation' => 'password',
+            'email'                 => $user->email,
+            'password'              => $password,
+            'password_confirmation' => $password,
         ]);
+
+        $this->assertDatabaseMissing('users', ['email' => $user->email]);
+
+        $this->assertGuest();
 
         $response->assertRedirect('/register');
         $response->assertInvalid(['name' => 'お名前を入力してください']);
@@ -31,15 +37,22 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_empty_email(): void
     {
+        $user     = User::factory()->make();
+        $password = 'password123';
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->post('/register', [
-            'name'                  => 'taro yamada',
+            'name'                  => $user->name,
             'email'                 => '',
-            'password'              => 'password',
-            'password_confirmation' => 'password',
+            'password'              => $password,
+            'password_confirmation' => $password,
         ]);
+
+        $this->assertDatabaseMissing('users', ['name' => $user->name]);
+
+        $this->assertGuest();
 
         $response->assertRedirect('/register');
         $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
@@ -47,15 +60,22 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_empty_password(): void
     {
+        $user     = User::factory()->make();
+        $password = 'password123';
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->post('/register', [
-            'name'                  => 'taro yamada',
-            'email'                 => 'test@example.com',
+            'name'                  => $user->name,
+            'email'                 => $user->email,
             'password'              => '',
-            'password_confirmation' => 'password',
+            'password_confirmation' => $password,
         ]);
+
+        $this->assertDatabaseMissing('users', ['email' => $user->email]);
+
+        $this->assertGuest();
 
         $response->assertRedirect('/register');
         $response->assertInvalid(['password' => 'パスワードを入力してください']);
@@ -63,15 +83,22 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_short_password(): void
     {
+        $user          = User::factory()->make();
+        $shortPassword = '1234567';
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->post('/register', [
-            'name'                  => 'taro yamada',
-            'email'                 => 'test@example.com',
-            'password'              => '1234567',
-            'password_confirmation' => '1234567',
+            'name'                  => $user->name,
+            'email'                 => $user->email,
+            'password'              => $shortPassword,
+            'password_confirmation' => $shortPassword,
         ]);
+
+        $this->assertDatabaseMissing('users', ['email' => $user->email]);
+
+        $this->assertGuest();
 
         $response->assertRedirect('/register');
         $response->assertInvalid(['password' => 'パスワードは8文字以上で入力してください']);
@@ -79,18 +106,24 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_with_unconfirmed_password(): void
     {
+        $user = User::factory()->make();
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->post('/register', [
-            'name'                  => 'taro yamada',
-            'email'                 => 'test@example.com',
+            'name'                  => $user->name,
+            'email'                 => $user->email,
             'password'              => 'password',
             'password_confirmation' => 'different-password',
         ]);
 
+        $this->assertDatabaseMissing('users', ['email' => $user->email]);
+
+        $this->assertGuest();
+
         $response->assertRedirect('/register');
-        $response->assertInvalid(['password' => 'パスワードと一致しません']);
+        $response->assertInvalid(['password_confirmation' => 'パスワードと一致しません']);
     }
 
     public function test_user_can_register_with_valid_input(): void
@@ -101,28 +134,32 @@ class RegisterTest extends TestCase
             $event->user->markEmailAsVerified();
         });
 
+        $user     = User::factory()->make();
+        $password = 'password123';
+
         $response = $this->get('/register');
         $response->assertOk();
 
         $response = $this->followingRedirects()->post('/register', [
-            'name'                  => 'taro yamada',
-            'email'                 => 'test@example.com',
-            'password'              => 'password',
-            'password_confirmation' => 'password',
+            'name'                  => $user->name,
+            'email'                 => $user->email,
+            'password'              => $password,
+            'password_confirmation' => $password,
         ]);
 
         $this->assertDatabaseHas('users', [
-            'name'  => 'taro yamada',
-            'email' => 'test@example.com',
+            'name'  => $user->name,
+            'email' => $user->email,
         ]);
-        $user = User::whereEmail('test@example.com')->first();
-        $this->assertTrue(Hash::check('password', $user->password));
-        // check if a corresponding profile resource was created for the new user
-        $this->assertNotNull($user->profile);
 
-        $this->assertAuthenticatedAs($user);
+        $registeredUser = User::whereEmail($user->email)->first();
 
-        $this->assertEquals(url('/mypage/profile/'.$user->profile->id), request()->url());
+        $this->assertAuthenticatedAs($registeredUser);
+
+        // check if a corresponding profile resource was created for the newly registered user
+        $this->assertNotNull($registeredUser->profile);
+
+        $this->assertEquals(url('/mypage/profile/'.$registeredUser->profile->id), request()->url());
         $response->assertOk();
     }
 }

@@ -36,7 +36,8 @@ class UnnecessaryCustomRegisterRequestJustToMeetTheSpecs extends FormRequest
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
+            'password'              => $this->passwordRules(),
+            'password_confirmation' => ['required', 'same:password'],
         ];
     }
 }
