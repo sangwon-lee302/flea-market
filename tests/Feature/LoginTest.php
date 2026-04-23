@@ -14,8 +14,7 @@ class LoginTest extends TestCase
     {
         User::factory()->create();
 
-        $response = $this->get('/login');
-        $response->assertOk();
+        $this->get('/login')->assertOk();
 
         $response = $this->post('/login', [
             'email'    => '',
@@ -32,8 +31,7 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->get('/login');
-        $response->assertOk();
+        $this->get('/login')->assertOk();
 
         $response = $this->post('/login', [
             'email'    => $user->email,
@@ -44,5 +42,22 @@ class LoginTest extends TestCase
 
         $response->assertRedirect('/login');
         $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
+    }
+
+    public function test_user_cannot_login_with_invalid_credentials(): void
+    {
+        $user = User::factory()->create();
+
+        $this->get('/login')->assertOk();
+
+        $response = $this->post('/login', [
+            'email'    => $user->email,
+            'password' => 'invalid-password',
+        ]);
+
+        $this->assertGuest();
+
+        $response->assertRedirect('/login');
+        $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
 }

@@ -17,8 +17,7 @@ class RegisterTest extends TestCase
         $user     = User::factory()->make();
         $password = 'password123';
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => '',
@@ -40,8 +39,7 @@ class RegisterTest extends TestCase
         $user     = User::factory()->make();
         $password = 'password123';
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => $user->name,
@@ -62,8 +60,7 @@ class RegisterTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => $user->name,
@@ -85,8 +82,7 @@ class RegisterTest extends TestCase
         $user          = User::factory()->make();
         $shortPassword = '1234567';
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => $user->name,
@@ -107,8 +103,7 @@ class RegisterTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->post('/register', [
             'name'                  => $user->name,
@@ -136,8 +131,7 @@ class RegisterTest extends TestCase
         $user     = User::factory()->make();
         $password = 'password123';
 
-        $response = $this->get('/register');
-        $response->assertOk();
+        $this->get('/register')->assertOk();
 
         $response = $this->followingRedirects()->post('/register', [
             'name'                  => $user->name,
@@ -159,6 +153,7 @@ class RegisterTest extends TestCase
         $this->assertNotNull($registeredUser->profile);
 
         $this->assertEquals(url('/mypage/profile/'.$registeredUser->profile->id), request()->url());
+
         $response->assertOk();
     }
 }
