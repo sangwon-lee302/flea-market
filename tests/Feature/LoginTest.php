@@ -26,4 +26,21 @@ class LoginTest extends TestCase
         $response->assertRedirect('/login');
         $response->assertInvalid(['email' => 'メールアドレスを入力してください']);
     }
+
+    public function test_user_cannot_login_with_empty_password(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->get('/login');
+        $response->assertOk();
+
+        $response = $this->post('/login', [
+            'email'    => $user->email,
+            'password' => '',
+        ]);
+
+        $this->assertGuest();
+        $response->assertRedirect('/login');
+        $response->assertInvalid(['password' => 'パスワードを入力してください']);
+    }
 }
