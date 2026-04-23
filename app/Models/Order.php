@@ -5,6 +5,7 @@ namespace App\Models;
 use App\PaymentMethod;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -102,5 +103,10 @@ class Order extends Model
         $order->save();
 
         session()->forget('shipping_address');
+    }
+
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class);
     }
 }
