@@ -51,4 +51,13 @@ class MylistIndexTest extends TestCase
         $response->assertOk();
         $response->assertSee('Sold');
     }
+
+    public function test_unauthenticated_user_is_shown_nothing(): void
+    {
+        $response = $this->get('/?tab=mylist');
+        $response->assertOk();
+        $response->assertViewHas('items', function ($items) {
+            return $items->isEmpty();
+        });
+    }
 }
