@@ -16,23 +16,20 @@ class ItemService
      */
     public function storeItem(User $user, UploadedFile $itemImage, array $itemData): Item
     {
-        $item = DB::transaction(function () use ($user, $itemImage, $itemData) {
+        return DB::transaction(function () use ($user, $itemImage, $itemData) {
             $hashName = $itemImage->hashName();
 
-            $item        = $user->items()->make(Arr::except($itemData, 'categories'));
-            $item->image = "images/{$hashName}";
+            $finalItemData = array_merge(['image' => "images/{$hashName}"], Arr::except($itemData, 'categories'));
 
-            $item->save();
+            $item = $user->items()->create($finalItemData);
 
-            $categoryIds = Category::whereIn('name', $itemData['categories'])->pluck('id');
+            $categoryIds = Category::whereIn('name', $itemData['categories'])->pluck('id')->toArray();
 
-            $item->categories()->sync($categoryIds);
+            $item->categories()->attach($categoryIds);
 
             $itemImage->storeAs('images', $hashName, 'public');
 
             return $item;
         });
-
-        return $item;
     }
 }

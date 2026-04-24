@@ -37,9 +37,7 @@ class UserFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (User $user) {
-            $user->profile()->create([
-                'nickname' => fake()->userName(),
-            ]);
+            $user->profile()->create();
         });
     }
 

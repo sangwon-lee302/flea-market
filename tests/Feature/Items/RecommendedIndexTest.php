@@ -13,9 +13,16 @@ class RecommendedIndexTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(CategorySeeder::class);
+    }
+
     public function test_unauthenticated_user_can_view_all_recommended_items(): void
     {
-        $this->seed([CategorySeeder::class, ItemSeeder::class]);
+        $this->seed(ItemSeeder::class);
 
         $items = Item::all();
 
@@ -26,25 +33,16 @@ class RecommendedIndexTest extends TestCase
         $response->assertViewHas('items', $items);
     }
 
-    public function test_items_bought_by_users_are_shown_as_sold(): void
+    public function test_only_items_bought_by_users_are_shown_as_sold(): void
     {
-        $this->seed(CategorySeeder::class);
-
         $user = User::factory()->create();
         $item = Item::factory()->create();
-        $item->categories()->attach(1);
 
         $response = $this->get('/');
         $response->assertOk();
         $response->assertDontSee('Sold');
 
-        $order = $user->orders()->make([
-            'payment_method'       => 1,
-            'shipping_postal_code' => '123-4567',
-            'shipping_address'     => '東京都千代田区1-1-1',
-        ]);
-        $order->item()->associate($item);
-        $order->save();
+        Order::factory()->recycle([$user, $item])->create();
 
         $response = $this->get('/');
         $response->assertOk();

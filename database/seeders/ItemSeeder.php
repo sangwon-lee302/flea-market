@@ -36,7 +36,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => 'Rolax',
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'price'       => 15000,
-                'categories'  => [$fashion->id, $mens->id, $accessories->id],
+                'categories'  => [$fashion, $mens, $accessories],
             ],
             [
                 'image_name'  => 'HDD-Hard-Disk.jpg',
@@ -45,7 +45,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => '西芝',
                 'description' => '高速で信頼性の高いハードディスク',
                 'price'       => 5000,
-                'categories'  => [$electronics->id],
+                'categories'  => [$electronics],
             ],
             [
                 'image_name'  => 'iLoveIMG-d.jpg',
@@ -54,7 +54,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => 'なし',
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'price'       => 300,
-                'categories'  => [$kitchen->id],
+                'categories'  => [$kitchen],
             ],
             [
                 'image_name'  => 'Leather-Shoes-Product-Photo.jpg',
@@ -63,7 +63,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => '',
                 'description' => 'クラシックなデザインの革靴',
                 'price'       => 4000,
-                'categories'  => [$fashion->id, $mens->id],
+                'categories'  => [$fashion, $mens],
             ],
             [
                 'image_name'  => 'Living-Room-Laptop.jpg',
@@ -72,7 +72,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => '',
                 'description' => '高性能なノートパソコン',
                 'price'       => 45000,
-                'categories'  => [$electronics->id],
+                'categories'  => [$electronics],
             ],
             [
                 'image_name'  => 'Music-Mic-4632231.jpg',
@@ -81,7 +81,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => 'なし',
                 'description' => '高音質のレコーディング用マイク',
                 'price'       => 8000,
-                'categories'  => [$electronics->id],
+                'categories'  => [$electronics],
             ],
             [
                 'image_name'  => 'Purse-fashion-pocket.jpg',
@@ -90,7 +90,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => '',
                 'description' => 'おしゃれなショルダーバッグ',
                 'price'       => 3500,
-                'categories'  => [$fashion->id, $womens->id],
+                'categories'  => [$fashion, $womens],
             ],
             [
                 'image_name'  => 'Tumbler-souvenir.jpg',
@@ -99,7 +99,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => 'なし',
                 'description' => '使いやすいタンブラー',
                 'price'       => 500,
-                'categories'  => [],
+                'categories'  => [$kitchen],
             ],
             [
                 'image_name'  => 'Waitress-with-Coffee-Grinder.jpg',
@@ -108,7 +108,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => 'Starbacks',
                 'description' => '手動のコーヒーミル',
                 'price'       => 4000,
-                'categories'  => [$kitchen->id],
+                'categories'  => [$kitchen],
             ],
             [
                 'image_name'  => 'makeup-set.jpg',
@@ -117,7 +117,7 @@ class ItemSeeder extends Seeder
                 'brand_name'  => '',
                 'description' => '便利なメイクアップセット',
                 'price'       => 2500,
-                'categories'  => [$cosmetics->id],
+                'categories'  => [$cosmetics],
             ],
         ];
 
@@ -135,7 +135,7 @@ class ItemSeeder extends Seeder
         foreach ($items as $data) {
             $destPath = $this->copyImageToStorage($data['image_name'], $subDir);
 
-            $item = Item::factory()->recycle(User::all())->create([
+            Item::factory()->recycle(User::all())->hasAttached($data['categories'])->create([
                 'image'       => $destPath,
                 'condition'   => $data['condition'],
                 'name'        => $data['name'],
@@ -143,8 +143,6 @@ class ItemSeeder extends Seeder
                 'description' => $data['description'],
                 'price'       => $data['price'],
             ]);
-
-            $item->categories()->attach($data['categories']);
         }
     }
 }

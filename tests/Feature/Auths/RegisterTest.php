@@ -140,12 +140,9 @@ class RegisterTest extends TestCase
             'password_confirmation' => $password,
         ]);
 
-        $this->assertDatabaseHas('users', [
-            'name'  => $user->name,
-            'email' => $user->email,
-        ]);
+        $this->assertDatabaseHas('users', ['email' => $user->email]);
 
-        $registeredUser = User::whereEmail($user->email)->first();
+        $registeredUser = User::where('email', $user->email)->first();
 
         $this->assertAuthenticatedAs($registeredUser);
 

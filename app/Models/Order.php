@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\PaymentMethod;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -42,6 +43,8 @@ use Stripe\Stripe;
 #[Fillable(['payment_method', 'shipping_postal_code', 'shipping_address', 'shipping_building'])]
 class Order extends Model
 {
+    use HasFactory;
+
     public function casts()
     {
         return [
