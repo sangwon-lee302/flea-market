@@ -52,7 +52,7 @@ class RecommendedIndexTest extends TestCase
 
     public function test_authenticated_user_is_not_shown_items_one_has_listed(): void
     {
-        $user = User::factory()->withProfile()->create();
+        $user = User::factory()->withProfileCompleted()->create();
         $item = Item::factory()->recycle($user)->create();
 
         $response = $this->actingAs($user)->get('/');
