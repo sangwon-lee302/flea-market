@@ -66,7 +66,7 @@ class ItemController extends Controller
         $item->loadCount(['likes', 'comments']);
 
         $isLiked = auth()->check()
-            ? auth()->user()->likedItems()->whereItemId($item->id)->exists()
+            ? auth()->user()->likedItems()->where('item_id', $item->id)->exists()
             : false;
 
         $categories = $item->categories;

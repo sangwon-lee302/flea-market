@@ -20,13 +20,13 @@ class ItemSeeder extends Seeder
      */
     public function run(): void
     {
-        $fashion     = Category::whereName(CategoryEnum::Fashion->value)->first();
-        $electronics = Category::whereName(CategoryEnum::Electronics->value)->first();
-        $womens      = Category::whereName(CategoryEnum::Womens->value)->first();
-        $mens        = Category::whereName(CategoryEnum::Mens->value)->first();
-        $cosmetics   = Category::whereName(CategoryEnum::Cosmetics->value)->first();
-        $kitchen     = Category::whereName(CategoryEnum::Kitchen->value)->first();
-        $accessories = Category::whereName(CategoryEnum::Accessories->value)->first();
+        $fashion     = Category::where('name', CategoryEnum::Fashion->value)->first();
+        $electronics = Category::where('name', CategoryEnum::Electronics->value)->first();
+        $womens      = Category::where('name', CategoryEnum::Womens->value)->first();
+        $mens        = Category::where('name', CategoryEnum::Mens->value)->first();
+        $cosmetics   = Category::where('name', CategoryEnum::Cosmetics->value)->first();
+        $kitchen     = Category::where('name', CategoryEnum::Kitchen->value)->first();
+        $accessories = Category::where('name', CategoryEnum::Accessories->value)->first();
 
         $items = [
             [
