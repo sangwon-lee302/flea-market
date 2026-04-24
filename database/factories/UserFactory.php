@@ -50,4 +50,21 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the model's corresponding profile should have a nickname, postal code, and address.
+     */
+    public function withProfile(?string $nickname = null, ?string $postalCode = null, ?string $address = null): static
+    {
+        return $this->afterCreating(function (User $user) use ($nickname, $postalCode, $address) {
+            $user->profile()->updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'nickname'    => $nickname ?? fake()->userName(),
+                    'postal_code' => $postalCode ?? fake()->postcode(),
+                    'address'     => $address ?? fake()->address(),
+                ]
+            );
+        });
+    }
 }
