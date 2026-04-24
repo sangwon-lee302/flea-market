@@ -21,15 +21,15 @@ class MylistIndexTest extends TestCase
 
         $user = User::factory()->withProfileCompleted()->create();
 
-        $likedItem    = Item::whereNot('user_id', $user->id)->first();
-        $notLikedItem = Item::whereNotIn('id', [$likedItem->id])->first();
+        $likedItem = Item::whereNot('user_id', $user->id)->first();
+        $otherItem = Item::whereNotIn('id', [$likedItem->id])->first();
 
         Like::factory()->recycle([$user, $likedItem])->create();
 
         $response = $this->actingAs($user)->get('/?tab=mylist');
         $response->assertOk();
-        $response->assertViewHas('items', function ($items) use ($likedItem, $notLikedItem) {
-            return $items->contains($likedItem) && ! $items->contains($notLikedItem);
+        $response->assertViewHas('items', function ($items) use ($likedItem, $otherItem) {
+            return $items->contains($likedItem) && ! $items->contains($otherItem);
         });
     }
 

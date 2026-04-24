@@ -1,6 +1,16 @@
 import axios from 'axios';
 import './bootstrap';
 
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    },
+);
+
 window.previewImage = function (event) {
     const file = event.target.files[0];
 
