@@ -24,6 +24,15 @@
                 method="GET"
                 class="w-[30%]"
             >
+                @foreach (request()->query() as $key => $value)
+                    @if ($key !== 'keyword')
+                        <input
+                            type="hidden"
+                            name="{{ $key }}"
+                            value="{{ $value }}"
+                        />
+                    @endif
+                @endforeach
                 <label for="search" class="sr-only">検索する商品名</label>
                 <input
                     id="search"
