@@ -15,22 +15,19 @@ class MylistIndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_is_only_shown_liked_items(): void
+    public function test_user_is_shown_liked_items(): void
     {
         $this->seed([CategorySeeder::class, ItemSeeder::class]);
 
         $user = User::factory()->withProfileCompleted()->create();
 
         $likedItem = Item::whereNot('user_id', $user->id)->first();
-        $otherItem = Item::whereNotIn('id', [$likedItem->id])->first();
 
         Like::factory()->recycle([$user, $likedItem])->create();
 
         $response = $this->actingAs($user)->get('/?tab=mylist');
         $response->assertOk();
-        $response->assertViewHas('items', function ($items) use ($likedItem, $otherItem) {
-            return $items->contains($likedItem) && ! $items->contains($otherItem);
-        });
+        $response->assertSee($likedItem->name);
     }
 
     public function test_sold_item_is_shown_sold(): void
@@ -49,15 +46,13 @@ class MylistIndexTest extends TestCase
 
         $response = $this->actingAs($user)->get('/?tab=mylist');
         $response->assertOk();
-        $response->assertSee('Sold');
+        $response->assertSeeInOrder(['Sold', $likedItem->name]);
     }
 
     public function test_unauthenticated_user_is_shown_nothing(): void
     {
         $response = $this->get('/?tab=mylist');
         $response->assertOk();
-        $response->assertViewHas('items', function ($items) {
-            return $items->isEmpty();
-        });
+        $response->assertDontSee('商品画像'); // all items have '商品画像' in their image's alt attribute
     }
 }

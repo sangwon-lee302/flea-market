@@ -16,15 +16,16 @@ class LoginTest extends TestCase
 
         $this->get('/login')->assertOk();
 
-        $response = $this->post('/login', [
+        $response = $this->followingRedirects()->post('/login', [
             'email'    => '',
             'password' => 'password',
         ]);
 
         $this->assertGuest();
 
-        $response->assertRedirect('/login');
-        $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
+        $this->assertEquals(url('/login'), request()->url());
+        $response->assertOk();
+        $response->assertSee('メールアドレスを入力してください');
     }
 
     public function test_user_cannot_login_with_empty_password(): void
@@ -33,15 +34,16 @@ class LoginTest extends TestCase
 
         $this->get('/login')->assertOk();
 
-        $response = $this->post('/login', [
+        $response = $this->followingRedirects()->post('/login', [
             'email'    => $user->email,
             'password' => '',
         ]);
 
         $this->assertGuest();
 
-        $response->assertRedirect('/login');
-        $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
+        $this->assertEquals(url('/login'), request()->url());
+        $response->assertOk();
+        $response->assertSee('パスワードを入力してください');
     }
 
     public function test_user_cannot_login_with_invalid_credentials(): void
@@ -50,15 +52,16 @@ class LoginTest extends TestCase
 
         $this->get('/login')->assertOk();
 
-        $response = $this->post('/login', [
+        $response = $this->followingRedirects()->post('/login', [
             'email'    => $user->email,
             'password' => 'invalid-password',
         ]);
 
         $this->assertGuest();
 
-        $response->assertRedirect('/login');
-        $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
+        $this->assertEquals(url('/login'), request()->url());
+        $response->assertOk();
+        $response->assertSee('ログイン情報が登録されていません');
     }
 
     public function test_user_can_login_with_valid_credentials(): void

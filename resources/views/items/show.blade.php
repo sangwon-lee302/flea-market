@@ -65,28 +65,23 @@
             <p class="mb-8 rounded-sm bg-gray-300 px-2 py-4">{{ $comment->body }}</p>
         @endforeach
         {{-- comments creation section --}}
-        <form
+        <x-form
             action="{{ route('comments.store', ['item' => $item]) }}"
             method="POST"
-            class="flex flex-col"
         >
-            @auth
-                <label>
-                    <p class="pb-2 text-xl font-bold">商品へのコメント</p>
-                    <textarea
-                        name="body"
-                        rows="10"
-                        class="w-full rounded-sm border-2 border-gray-400 p-2"
-                        >{{ old('body') }}</textarea
-                    >
-                    @error ('body')
-                        <p class="text-red-500">{{ $message }}</p>
-                    @enderror
-                </label>
-            @endauth
-            <button class="btn btn-primary mt-8">
-                {{ auth()->check() ? 'コメントを送信する' : 'ログインしてコメントを入力'}}
-            </button>
-        </form>
+            <label>
+                <p class="pb-2 text-xl font-bold">商品へのコメント</p>
+                <textarea
+                    name="body"
+                    rows="10"
+                    class="w-full rounded-sm border-2 border-gray-400 p-2"
+                    >{{ old('body') }}</textarea
+                >
+                @error ('body')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
+            </label>
+            <x-form.button class="mt-8">コメントを送信する</x-form.button>
+        </x-form>
     </div>
 </x-app-layout>

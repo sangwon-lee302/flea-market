@@ -1,5 +1,5 @@
 @props ([
-    'title' => '',
+    'title' => null,
     'method' => 'GET',
 ])
 
@@ -10,11 +10,13 @@
 @endphp
 
 <div>
-    <h1 class="text-center text-4xl font-bold">{{ $title }}</h1>
+    @if ($title)
+        <h1 class="mb-12 text-center text-4xl font-bold">{{ $title }}</h1>
+    @endif
 
     <form
         method="{{ $isGet ? 'GET' : 'POST' }}"
-        {{ $attributes->merge(['class' => 'mt-12 flex flex-col']) }}
+        {{ $attributes->merge(['class' => 'flex flex-col']) }}
     >
         @if (! $isGet)
             @csrf

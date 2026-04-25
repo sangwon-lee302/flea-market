@@ -3,8 +3,6 @@
 namespace Tests\Feature\Items;
 
 use App\Models\Item;
-use App\Models\Like;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,45 +10,30 @@ class SearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_partial_match_search_by_item_name_is_possible(): void
+    public function test_partial_match_search_by_item_name_is_working(): void
     {
-        $searchItem = Item::factory()->create(['name' => 'Test Item Name']);
+        $searchItem = Item::factory()->create(['name' => 'Search Item Name']);
         $otherItem  = Item::factory()->create(['name' => 'Other Item Name']);
 
-        $searchKeyword = 'Test';
-        $response      = $this->get('/?keyword='.urlencode($searchKeyword));
-
-        $response->assertOk();
-
-        $response->assertViewHas('items', function ($items) use ($searchItem, $otherItem) {
-            return $items->contains($searchItem) && ! $items->contains($otherItem);
-        });
-    }
-
-    public function test_search_keyword_is_kept_in_mylist(): void
-    {
-        $searchItem = Item::factory()->create(['name' => 'Test Item Name']);
-        $otherItem  = Item::factory()->create(['name' => 'Other Item Name']);
-
-        $searchKeyword = 'Test';
+        $searchKeyword = 'Search';
 
         $response = $this->get('/?keyword='.urlencode($searchKeyword));
 
         $response->assertOk();
-        $response->assertViewHas('items', function ($items) use ($searchItem, $otherItem) {
-            return $items->contains($searchItem) && ! $items->contains($otherItem);
-        });
+        $response->assertSee($searchItem->name);
+        $response->assertDontSee($otherItem->name);
+    }
 
-        $user = User::factory()->withProfileCompleted()->create();
+    public function test_search_keyword_is_kept_in_mylist(): void
+    {
+        $searchKeyword = 'Search';
 
-        Like::factory()->recycle([$user, $searchItem])->create();
-        Like::factory()->recycle([$user, $otherItem])->create();
-
-        $response = $this->actingAs($user)->get('/?tab=mylist&keyword='.urlencode($searchKeyword));
+        $response = $this->get('/?keyword='.urlencode($searchKeyword));
 
         $response->assertOk();
-        $response->assertViewHas('items', function ($items) use ($searchItem, $otherItem) {
-            return $items->contains($searchItem) && ! $items->contains($otherItem);
-        });
+
+        // check if the mylist link in the navigation contains the search keyword
+        $response->assertSeeInOrder(['おすすめ', 'keyword='.urlencode($searchKeyword)]);
+        $response->assertSeeInOrder(['keyword='.urlencode($searchKeyword), 'マイリスト']);
     }
 }

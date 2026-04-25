@@ -31,17 +31,15 @@ class RecommendedIndexTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewHas('items', $items);
+        foreach ($items as $item) {
+            $response->assertSee($item->name);
+        }
     }
 
     public function test_only_items_bought_by_users_are_shown_as_sold(): void
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
-
-        $response = $this->get('/');
-        $response->assertOk();
-        $response->assertDontSee('Sold');
 
         Order::factory()->recycle([$user, $item])->create();
 

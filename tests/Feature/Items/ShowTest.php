@@ -32,6 +32,7 @@ class ShowTest extends TestCase
         $response->assertSee('カテゴリー');
         $response->assertSee($item->condition);
         foreach ($item->comments as $comment) {
+            $response->assertSee(asset('storage/'.$comment->user->profile->avatar), false);
             $response->assertSee($comment->user->profile->nickname);
             $response->assertSee($comment->body);
         }
@@ -41,12 +42,10 @@ class ShowTest extends TestCase
     {
         $item = Item::factory()->create();
 
-        $categories = $item->categories;
-
         $response = $this->get(route('items.show', $item));
 
         $response->assertOk();
-        foreach ($categories as $category) {
+        foreach ($item->categories as $category) {
             $response->assertSee($category->name);
         }
     }

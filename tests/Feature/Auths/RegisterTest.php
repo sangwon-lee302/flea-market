@@ -19,7 +19,7 @@ class RegisterTest extends TestCase
 
         $this->get('/register')->assertOk();
 
-        $response = $this->post('/register', [
+        $response = $this->followingRedirects()->post('/register', [
             'name'                  => '',
             'email'                 => $user->email,
             'password'              => $password,
@@ -30,8 +30,9 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $response->assertRedirect('/register');
-        $response->assertSessionHasErrors(['name' => 'お名前を入力してください']);
+        $this->assertEquals(url('/register'), request()->url());
+        $response->assertOk();
+        $response->assertSee('お名前を入力してください');
     }
 
     public function test_user_cannot_register_with_empty_email(): void
@@ -41,7 +42,7 @@ class RegisterTest extends TestCase
 
         $this->get('/register')->assertOk();
 
-        $response = $this->post('/register', [
+        $response = $this->followingRedirects()->post('/register', [
             'name'                  => $user->name,
             'email'                 => '',
             'password'              => $password,
@@ -52,8 +53,9 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $response->assertRedirect('/register');
-        $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
+        $this->assertEquals(url('/register'), request()->url());
+        $response->assertOk();
+        $response->assertSee('メールアドレスを入力してください');
     }
 
     public function test_user_cannot_register_with_empty_password(): void
@@ -62,7 +64,7 @@ class RegisterTest extends TestCase
 
         $this->get('/register')->assertOk();
 
-        $response = $this->post('/register', [
+        $response = $this->followingRedirects()->post('/register', [
             'name'                  => $user->name,
             'email'                 => $user->email,
             'password'              => '',
@@ -73,8 +75,9 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $response->assertRedirect('/register');
-        $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
+        $this->assertEquals(url('/register'), request()->url());
+        $response->assertOk();
+        $response->assertSee('パスワードを入力してください');
     }
 
     public function test_user_cannot_register_with_short_password(): void
@@ -84,7 +87,7 @@ class RegisterTest extends TestCase
 
         $this->get('/register')->assertOk();
 
-        $response = $this->post('/register', [
+        $response = $this->followingRedirects()->post('/register', [
             'name'                  => $user->name,
             'email'                 => $user->email,
             'password'              => $shortPassword,
@@ -95,8 +98,9 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $response->assertRedirect('/register');
-        $response->assertSessionHasErrors(['password' => 'パスワードは8文字以上で入力してください']);
+        $this->assertEquals(url('/register'), request()->url());
+        $response->assertOk();
+        $response->assertSee('パスワードは8文字以上で入力してください');
     }
 
     public function test_user_cannot_register_with_unconfirmed_password(): void
@@ -105,7 +109,7 @@ class RegisterTest extends TestCase
 
         $this->get('/register')->assertOk();
 
-        $response = $this->post('/register', [
+        $response = $this->followingRedirects()->post('/register', [
             'name'                  => $user->name,
             'email'                 => $user->email,
             'password'              => 'password',
@@ -116,8 +120,9 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $response->assertRedirect('/register');
-        $response->assertSessionHasErrors(['password_confirmation' => 'パスワードと一致しません']);
+        $this->assertEquals(url('/register'), request()->url());
+        $response->assertOk();
+        $response->assertSee('パスワードと一致しません');
     }
 
     public function test_user_can_register_with_valid_input(): void
@@ -150,7 +155,6 @@ class RegisterTest extends TestCase
         $this->assertNotNull($registeredUser->profile);
 
         $this->assertEquals(url('/mypage/profile/'.$registeredUser->profile->id), request()->url());
-
         $response->assertOk();
     }
 }
