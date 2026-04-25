@@ -42,7 +42,7 @@ class OrderTest extends TestCase
         $item = Item::factory()->create(['price' => 120]); // stripe doesn't accept payments less than 120 yen for cards
 
         $order = Order::factory()->recycle([$user, $item])
-            ->create(['payment_method' => 2]) // konbini payment is unavailable without webhook
+            ->create(['payment_method' => 2]) // since webhook isn't implemented, only card payment would be tested here
             ->toArray();
 
         $this->actingAs($user)
@@ -67,7 +67,7 @@ class OrderTest extends TestCase
         $item = Item::factory()->create(['price' => 120]); // stripe doesn't accept payments less than 120 yen for cards
 
         $order = Order::factory()->recycle([$user, $item])
-            ->create(['payment_method' => 2]) // konbini payment is unavailable without webhook
+            ->create(['payment_method' => 2]) // since webhook isn't implemented, only card payment would be tested here
             ->toArray();
 
         $this->actingAs($user)
