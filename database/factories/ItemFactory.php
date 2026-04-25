@@ -24,7 +24,7 @@ class ItemFactory extends Factory
             'user_id'     => User::factory(),
             'image'       => 'images/default-item-image.jpg',
             'condition'   => fake()->randomElement(Condition::class)->value,
-            'name'        => fake()->word(),
+            'name'        => fake()->words(3, true),
             'brand_name'  => fake()->company(),
             'description' => fake()->realText(255),
             'price'       => fake()->numberBetween(1),

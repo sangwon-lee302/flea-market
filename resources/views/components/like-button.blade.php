@@ -7,6 +7,8 @@
     id="like-button"
     type="button"
     onclick="toggleLike({{ $item->id }})"
+    data-on-src="{{ asset('images/likes_on.png') }}"
+    data-off-src="{{ asset('images/likes_off.png') }}"
     class="flex cursor-pointer flex-col items-center focus:outline-none"
 >
     <img

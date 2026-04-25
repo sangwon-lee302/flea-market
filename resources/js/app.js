@@ -45,14 +45,11 @@ window.toggleLike = function (itemId) {
     axios
         .post(`/likes/${itemId}/toggle`)
         .then((response) => {
-            const isAttached = response.data.isAttached;
-            const likesCount = response.data.likesCount;
+            icon.src = response.data.isAttached
+                ? button.dataset.onSrc
+                : button.dataset.offSrc;
 
-            icon.src = isAttached
-                ? '/images/likes_on.png'
-                : '/images/likes_off.png';
-
-            countSpan.innerText = likesCount;
+            countSpan.innerText = response.data.likesCount;
         })
         .catch((error) => {
             console.error(error);

@@ -31,4 +31,19 @@ class LikeTest extends DuskTestCase
             'item_id' => $item->id,
         ]);
     }
+
+    public function test_likes_icon_updated_after_liking(): void
+    {
+        $user = User::factory()->withProfileCompleted()->create();
+        $item = Item::factory()->recycle($user)->create();
+
+        $this->browse(function (Browser $browser) use ($user, $item) {
+            $browser->loginAs($user)
+                ->visit('/item/'.$item->id)
+                ->assertAttribute('#like-icon', 'src', asset('images/likes_off.png'))
+                ->press('#like-button')
+                ->waitFor('#like-icon')
+                ->assertAttribute('#like-icon', 'src', asset('images/likes_on.png'));
+        });
+    }
 }
