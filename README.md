@@ -13,8 +13,9 @@
 - `sail up -d --build`
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
-- `sail npm i && sail npm run dev`
-- ホスト側のOSに直接`Node.js`をインストールする(lint-stagedを使用するのため)
+- `sail npm i`
+- `sail npm run dev`
+- ホスト側のOSに直接`Node.js`をインストールする(pre-commit時のlint-stagedのため)
 
 ## 使用技術
 
@@ -23,6 +24,8 @@
 - Mysql 8.4.8
 - Node 24.14.0
 - Mailpit v1.29.5
+- phpmyadmin 5.2.3
+- Selenium 4.43.0
 
 ## ER図
 
@@ -33,4 +36,8 @@
 ### 仕様書からの変更点
 
 - MailhogやMailtrapの代わりにMailpitを使用
+
+### 仕様書には明記されていない仕様に関して
+
 - いいね機能を非同期通信(Ajax)を用いて実装したためテストコードはLaravel Duskを用いて実装(レスポンスの中身の確認だけでは本当に画面が正しく切り替わっているか保証できないため)
+- 商品購入画面で選択した支払い方法がテーブルに即時表示される機能もAjaxを用いて実装しているため、テストの要件を満たすためにLaravel Duskを使用
