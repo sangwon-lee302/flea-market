@@ -4,6 +4,7 @@
 ])
 
 <button
+    id="like-button"
     type="button"
     onclick="toggleLike({{ $item->id }})"
     class="flex cursor-pointer flex-col items-center focus:outline-none"
