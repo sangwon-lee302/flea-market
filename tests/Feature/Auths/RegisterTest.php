@@ -30,8 +30,8 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $this->assertEquals(url('/register'), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/register'), request()->url());
         $response->assertSee('お名前を入力してください');
     }
 
@@ -53,8 +53,8 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $this->assertEquals(url('/register'), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/register'), request()->url());
         $response->assertSee('メールアドレスを入力してください');
     }
 
@@ -75,8 +75,8 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $this->assertEquals(url('/register'), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/register'), request()->url());
         $response->assertSee('パスワードを入力してください');
     }
 
@@ -98,8 +98,8 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $this->assertEquals(url('/register'), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/register'), request()->url());
         $response->assertSee('パスワードは8文字以上で入力してください');
     }
 
@@ -120,8 +120,8 @@ class RegisterTest extends TestCase
 
         $this->assertGuest();
 
-        $this->assertEquals(url('/register'), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/register'), request()->url());
         $response->assertSee('パスワードと一致しません');
     }
 
@@ -154,7 +154,7 @@ class RegisterTest extends TestCase
         // check if a corresponding profile resource was created for the newly registered user
         $this->assertNotNull($registeredUser->profile);
 
-        $this->assertEquals(url('/mypage/profile/'.$registeredUser->profile->id), request()->url());
         $response->assertOk();
+        $this->assertEquals(url('/mypage/profile/'.$registeredUser->profile->id), request()->url());
     }
 }
