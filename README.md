@@ -10,7 +10,7 @@
 - `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
 - `cp .env.example .env`、`.env`編集(OS環境変数を適宜変更)
-- `sail up -d`
+- `sail up -d --build`
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
 - `sail npm i && sail npm run dev`
