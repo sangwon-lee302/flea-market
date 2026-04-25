@@ -14,6 +14,7 @@
         <tr class="border">
             <th class="p-8 font-normal">支払い方法</th>
             <td
+                id="payment-method-display"
                 x-text="
                     $store.checkout.labels[$store.checkout.paymentMethod] ||
                     '(未選択)'

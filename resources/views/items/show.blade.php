@@ -23,6 +23,7 @@
             </div>
         </div>
         <a
+            id="checkout-button"
             href="{{ route('orders.create', ['item' => $item]) }}"
             class="btn btn-primary"
             >購入手続きへ</a

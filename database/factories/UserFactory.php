@@ -61,7 +61,7 @@ class UserFactory extends Factory
                 ['user_id' => $user->id],
                 [
                     'nickname'    => $nickname ?? fake()->userName(),
-                    'postal_code' => $postalCode ?? fake()->postcode(),
+                    'postal_code' => $postalCode ?? fake()->numerify('###-####'),
                     'address'     => $address ?? fake()->address(),
                 ]
             );

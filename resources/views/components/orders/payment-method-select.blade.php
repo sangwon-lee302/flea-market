@@ -5,6 +5,7 @@
 
 <div {{ $attributes }}>
     <select
+        id="payment-method"
         x-model="$store.checkout.paymentMethod"
         name="payment_method"
         form="order_form"
