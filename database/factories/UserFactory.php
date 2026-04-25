@@ -54,15 +54,16 @@ class UserFactory extends Factory
     /**
      * Indicate that the model's corresponding profile should have a nickname, postal code, and address.
      */
-    public function withProfileCompleted(?string $nickname = null, ?string $postalCode = null, ?string $address = null): static
+    public function withProfileCompleted(?string $nickname = null, ?string $postalCode = null, ?string $address = null, ?string $building = null): static
     {
-        return $this->afterCreating(function (User $user) use ($nickname, $postalCode, $address) {
+        return $this->afterCreating(function (User $user) use ($nickname, $postalCode, $address, $building) {
             $user->profile()->updateOrCreate(
                 ['user_id' => $user->id],
                 [
                     'nickname'    => $nickname ?? fake()->userName(),
                     'postal_code' => $postalCode ?? fake()->numerify('###-####'),
                     'address'     => $address ?? fake()->address(),
+                    'building'    => $building,
                 ]
             );
         });
