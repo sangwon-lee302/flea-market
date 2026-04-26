@@ -11,6 +11,7 @@
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
 - `cp .env.example .env`、`.env`編集(環境変数を変更)
 - `cp .env.dusk.example .env.dusk.local`、`.env.dusk.local`適宜編集(Laravel Duskによるテストを実行するため)
+- `touch database/dusk_testing.sqlite`
 - `sail up -d --build`
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
