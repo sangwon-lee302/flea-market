@@ -7,13 +7,13 @@ use App\Condition;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;
-use Database\Seeders\Traits\HasImageSeeder;
+use Database\Seeders\Traits\HasImagesToSeed;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
 class ItemSeeder extends Seeder
 {
-    use HasImageSeeder;
+    use HasImagesToSeed;
 
     /**
      * Run the database seeds.

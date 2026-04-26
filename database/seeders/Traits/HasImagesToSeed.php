@@ -5,7 +5,7 @@ namespace Database\Seeders\Traits;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-trait HasImageSeeder
+trait HasImagesToSeed
 {
     protected function copyImageToStorage(string $filename, string $subDir = ''): string
     {

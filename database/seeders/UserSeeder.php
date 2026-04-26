@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\Traits\HasImageSeeder;
+use Database\Seeders\Traits\HasImagesToSeed;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserSeeder extends Seeder
 {
-    use HasImageSeeder;
+    use HasImagesToSeed;
 
     /**
      * Run the database seeds.
