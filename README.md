@@ -14,6 +14,7 @@
 - `touch database/dusk_testing.sqlite`
 - `sail up -d --build`
 - `sail artisan key:generate`
+- `sail artisan key:generate --env=dusk.local`
 - `sail artisan migrate --seed`
 - `sail npm i`
 - `sail npm run dev`
