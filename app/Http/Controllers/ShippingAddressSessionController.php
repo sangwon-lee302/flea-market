@@ -6,12 +6,12 @@ use App\Http\Requests\ShippingAddressRequest;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
-class ShippingAddressController extends Controller
+class ShippingAddressSessionController extends Controller
 {
     /**
      * Show the form for editing a shipping address.
      */
-    public function editSession(Request $request, Item $item)
+    public function edit(Request $request, Item $item)
     {
         session(['order_data' => $request->all()]);
 
@@ -29,7 +29,7 @@ class ShippingAddressController extends Controller
     /**
      * Update a shipping address.
      */
-    public function updateSession(ShippingAddressRequest $request, Item $item)
+    public function update(ShippingAddressRequest $request, Item $item)
     {
         $validated = $request->validated();
 

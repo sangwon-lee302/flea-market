@@ -5,7 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShippingAddressController;
+use App\Http\Controllers\ShippingAddressSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('profile.complete')->name('items.')->group(function () {
@@ -36,6 +36,6 @@ Route::middleware(['auth', 'verified', 'profile.complete'])->name('comments.')->
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('shipping_addresses.')->group(function () {
-    Route::post('purchase/address/{item}', [ShippingAddressController::class, 'editSession'])->name('edit');
-    Route::post('purchase/address/{item}/update', [ShippingAddressController::class, 'updateSession'])->name('update');
+    Route::post('purchase/address/{item}', [ShippingAddressSessionController::class, 'edit'])->name('edit');
+    Route::post('purchase/address/{item}/update', [ShippingAddressSessionController::class, 'update'])->name('update');
 });
