@@ -1,4 +1,4 @@
-@props (['src' => 'avatars/default.jpg'])
+@props (['src' => 'avatars/default-avatar.jpg'])
 
 <div>
     <div class="flex items-center gap-8">

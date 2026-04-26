@@ -10,11 +10,11 @@
 - `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
 - `cp .env.example .env`、`.env`編集(環境変数を変更)
-- `cp .env.dusk.example .env.dusk.local`、`.env.dusk.local`適宜編集(Laravel Duskによるテストを実行するため)
-- `touch database/dusk_testing.sqlite`
+- `cp .env.dusk.example .env.dusk.local`(Laravel Duskによるテストを実行するため)
 - `sail up -d --build`
 - `sail artisan key:generate`
 - `sail artisan key:generate --env=dusk.local`
+- `sail artisan storage:link`
 - `sail artisan migrate --seed`
 - `sail npm i`
 - `sail npm run build`(Laravel Duskによるテスト実行のため`dev`ではなく`build`を使用)
@@ -56,6 +56,7 @@
 ### 仕様書からの変更点
 
 - MailhogやMailtrapの代わりにMailpitを使用
+- プロフィール編集画面および商品出品画面にてバリデーションエラーによりリダイレクトした際、アップロードされた画像が自動で表示される機能は未実装（画像以外の表示機能は実装済み）
 
 ### 仕様書には明記されていない仕様に関して
 

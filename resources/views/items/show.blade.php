@@ -3,7 +3,7 @@
     <img
         src="{{ asset('storage/'.$item->image) }}"
         alt="商品画像"
-        class="w-full max-w-100 rounded-xl p-4 lg:sticky lg:top-41 lg:aspect-square"
+        class="mx-auto max-h-150 rounded-xl object-contain p-4 lg:sticky lg:top-41 lg:aspect-square lg:w-full lg:max-w-100"
     />
     {{-- item detail --}}
     <div class="flex flex-col p-4">

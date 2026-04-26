@@ -1,4 +1,4 @@
-@props (['src' => 'avatars/default.jpg'])
+@props (['src' => 'avatars/default-avatar.jpg'])
 
 <img
     src="{{ asset('storage/'.$src) }}"
