@@ -9,13 +9,31 @@
 - `git clone git@github.com:sangwon-lee302/flea-market.git`
 - `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
-- `cp .env.example .env`、`.env`編集(OS環境変数を適宜変更)
+- `cp .env.example .env`、`.env`編集(環境変数を変更)
+- `cp .env.dusk.example .env.dusk.local`、`.env.dusk.local`適宜編集(Laravel Duskによるテストを実行するため)
 - `sail up -d --build`
 - `sail artisan key:generate`
 - `sail artisan migrate --seed`
 - `sail npm i`
 - `sail npm run dev`
 - ホスト側のOSに直接`Node.js`をインストールする(pre-commit時のlint-stagedのため)
+
+## URL
+
+- 商品一覧画面: http://localhost/
+- 商品一覧画面（マイリスト）: http://localhost/?tab=mylist
+- 会員登録画面: http://localhost/register
+- ログイン画面: http://localhost/login
+- 商品詳細画面: http://localhost/item/{item}
+- 商品購入画面: http://localhost/purchase/{item}
+- 送付先住所変更画面: http://localhost/purchase/address/{item}
+- 商品出品画面: http://localhost/sell
+- プロフィール画面: http://localhost/mypage
+- プロフィール編集画面: http://localhost/mypage/profile
+- プロフィール画面（購入した商品一覧）: http://localhost/mypage?page=buy
+- プロフィール画面（出品した商品一覧）: http://localhost/mypage?page=sell
+- mailpit: http://localhost:8025
+- phpmyadmin: http://localhost:8080
 
 ## 使用技術
 
