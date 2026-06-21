@@ -63,8 +63,6 @@
                     >
                 @endguest
 
-                {{-- maybe it would be better to simply hide the mypage link for guests --}}
-                {{-- but i have to meet the specs... --}}
                 <a
                     href="{{ 
                         auth()->check()
