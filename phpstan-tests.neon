@@ -1,0 +1,9 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+    - phpstan-baseline-tests.neon
+
+parameters:
+    paths:
+        - database/factories/
+        - tests/
+    level: 4
