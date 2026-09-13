@@ -10,6 +10,7 @@
 - `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
 - `cp .env.example .env`、`.env`編集(環境変数を変更)
+- Stripeのテスト用APIキー(`STRIPE_KEY`、`STRIPE_SECRET`)を[Stripeダッシュボード](https://dashboard.stripe.com/test/apikeys)から取得し、`.env`に設定
 - `cp .env.dusk.example .env.dusk.local`(Laravel Duskによるテストを実行するため)
 - `sail up -d --build`
 - `sail artisan key:generate`
