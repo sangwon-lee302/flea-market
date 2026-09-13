@@ -31,6 +31,7 @@ use Illuminate\Support\Carbon;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
+ * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Profile|null $profile
@@ -59,7 +60,7 @@ use Illuminate\Support\Carbon;
  * @mixin \Eloquent
  */
 #[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password'])]
+#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
