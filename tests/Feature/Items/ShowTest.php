@@ -30,7 +30,7 @@ class ShowTest extends TestCase
         $response->assertSee($item->comments_count);
         $response->assertSee($item->description);
         $response->assertSee('カテゴリー');
-        $response->assertSee($item->condition);
+        $response->assertSee($item->condition->label());
         foreach ($item->comments as $comment) {
             $response->assertSee(asset('storage/'.$comment->user->profile->avatar), false);
             $response->assertSee($comment->user->profile->nickname);

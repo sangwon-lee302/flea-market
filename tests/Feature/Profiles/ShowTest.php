@@ -30,7 +30,7 @@ class ShowTest extends TestCase
         $response->assertOk();
         $response->assertViewIs('profiles.show');
         $response->assertSee(asset('storage/'.$user->profile->avatar));
-        $response->assertSee($user->profile->name);
+        $response->assertSee($user->profile->nickname);
         $response->assertSee(asset('storage/'.$item->image));
         $response->assertSee($item->name);
         $response->assertSee($soldItem->name);
@@ -43,7 +43,7 @@ class ShowTest extends TestCase
         $response->assertOk();
         $response->assertViewIs('profiles.show');
         $response->assertSee(asset('storage/'.$user->profile->avatar));
-        $response->assertSee($user->profile->name);
+        $response->assertSee($user->profile->nickname);
         $response->assertSee(asset('storage/'.$boughtItem->image));
         $response->assertSee($boughtItem->name);
         $response->assertDontSee('Sold');

@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $user_id
  * @property string $image
- * @property int $condition
+ * @property Condition $condition
  * @property string $name
  * @property string|null $brand_name
  * @property string $description
