@@ -18,12 +18,12 @@ class ItemController extends Controller
     {
         if (request('tab') === 'mylist') {
             $items = auth()->user()?->likedItems()->search(request('keyword'))
-                ->withExists('order')
+                ->whereDoesntHave('order')
                 ->get() ?? collect([]);
         } else {
             $items = Item::when(auth()->check(), fn ($q) => $q->whereNot('user_id', auth()->id()))
                 ->search(request('keyword'))
-                ->withExists('order')
+                ->whereDoesntHave('order')
                 ->get();
         }
 

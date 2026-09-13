@@ -14,6 +14,7 @@
     </div>
     <x-items.list-with-nav
         :items="$items"
+        :show-sold-label="$showSoldLabel"
         :links="[
             '出品した商品' => ['name' => 'profiles.show', 'param' => ['profile' => $profile, 'page' => 'sell']],
             '購入した商品' => ['name' => 'profiles.show', 'param' => ['profile' => $profile, 'page' => 'buy']],

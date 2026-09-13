@@ -9,18 +9,14 @@ use Illuminate\View\Component;
 
 class ListWithNav extends Component
 {
-    public $items;
-
-    public $links;
-
     /**
      * Create a new component instance.
      */
-    public function __construct(array|Collection $items = [], array $links = [])
-    {
-        $this->items = $items;
-        $this->links = $links;
-    }
+    public function __construct(
+        public array|Collection $items = [],
+        public array $links = [],
+        public bool $showSoldLabel = true,
+    ) {}
 
     /**
      * Get the view / contents that represent the component.

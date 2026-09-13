@@ -36,7 +36,7 @@ class RecommendedIndexTest extends TestCase
         }
     }
 
-    public function test_only_items_bought_by_users_are_shown_as_sold(): void
+    public function test_bought_items_are_not_shown(): void
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -45,7 +45,7 @@ class RecommendedIndexTest extends TestCase
 
         $response = $this->get('/');
         $response->assertOk();
-        $response->assertSee('Sold');
+        $response->assertDontSee($item->name);
     }
 
     public function test_authenticated_user_is_not_shown_items_one_has_listed(): void

@@ -30,7 +30,7 @@ class MylistIndexTest extends TestCase
         $response->assertSee($likedItem->name);
     }
 
-    public function test_sold_item_is_shown_sold(): void
+    public function test_sold_item_is_not_shown_in_mylist(): void
     {
         $this->seed([CategorySeeder::class, ItemSeeder::class]);
 
@@ -46,7 +46,7 @@ class MylistIndexTest extends TestCase
 
         $response = $this->actingAs($user)->get('/?tab=mylist');
         $response->assertOk();
-        $response->assertSeeInOrder(['Sold', $likedItem->name]);
+        $response->assertDontSee($likedItem->name);
     }
 
     public function test_unauthenticated_user_is_shown_nothing(): void

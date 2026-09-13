@@ -36,7 +36,7 @@ class OrderTest extends TestCase
         ]);
     }
 
-    public function test_bought_item_is_shown_sold(): void
+    public function test_bought_item_is_not_shown_in_item_list(): void
     {
         $user = User::factory()->withProfileCompleted()->create();
         $item = Item::factory()->create(['price' => 120]); // stripe doesn't accept payments less than 120 yen for cards
@@ -58,7 +58,7 @@ class OrderTest extends TestCase
 
         $response->assertOk();
         $response->assertViewIs('items.index');
-        $response->assertSee('Sold');
+        $response->assertDontSee($item->name);
     }
 
     public function test_bought_item_is_shown_in_profile(): void
