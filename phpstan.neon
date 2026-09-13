@@ -7,7 +7,6 @@ parameters:
         - app/
         - bootstrap/
         - config/
-        - database/migrations/
-        - database/seeders/
+        - database/
         - routes/
     level: 5

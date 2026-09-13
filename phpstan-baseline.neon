@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Call to an undefined method Faker\\Generator\:\:secondaryAddress\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: database/factories/OrderFactory.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\:\:search\(\)\.$#'
 			identifier: method.notFound
 			count: 1

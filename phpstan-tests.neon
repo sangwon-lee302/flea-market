@@ -1,9 +1,12 @@
+# Level 4 (not 5, as used for app/ in phpstan.neon) to avoid false positives from
+# loosely-typed test helpers (e.g. assertSee()), whose docblock-only param types
+# don't match the values Laravel coerces at runtime (an argument.type check that
+# only exists starting at level 5).
 includes:
     - ./vendor/larastan/larastan/extension.neon
     - phpstan-baseline-tests.neon
 
 parameters:
     paths:
-        - database/factories/
         - tests/
     level: 4
