@@ -17,6 +17,10 @@ class ShowTest extends TestCase
         $user = User::factory()->withProfileCompleted()->create();
         $item = Item::factory()->recycle($user)->create();
 
+        $soldItem  = Item::factory()->recycle($user)->create();
+        $otherUser = User::factory()->create();
+        Order::factory()->recycle([$otherUser, $soldItem])->create();
+
         $boughtItem = Item::factory()->recycle($user)->create();
         Order::factory()->recycle([$user, $boughtItem])->create();
 
@@ -29,6 +33,8 @@ class ShowTest extends TestCase
         $response->assertSee($user->profile->name);
         $response->assertSee(asset('storage/'.$item->image));
         $response->assertSee($item->name);
+        $response->assertSee($soldItem->name);
+        $response->assertSee('Sold');
 
         $response = $this->actingAs($user)
             ->get('/mypage/'.$user->profile->id.'?page=buy');
@@ -39,6 +45,8 @@ class ShowTest extends TestCase
         $response->assertSee($user->profile->name);
         $response->assertSee(asset('storage/'.$boughtItem->image));
         $response->assertSee($boughtItem->name);
+        $response->assertDontSee('Sold');
+        $response->assertSee(route('items.show', $boughtItem));
     }
 
     public function test_default_profile_information_is_shown(): void

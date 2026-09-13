@@ -12,13 +12,17 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        if (request('page') === 'buy') {
-            $items = auth()->user()->orderedItems()->withExists('order')->get();
-        } else {
-            $items = auth()->user()->items()->withExists('order')->get();
-        }
+        $isBuyPage = request('page') === 'buy';
 
-        return view('profiles.show', ['profile' => $profile, 'items' => $items]);
+        $items = $isBuyPage
+            ? auth()->user()->orderedItems()->withExists('order')->get()
+            : auth()->user()->items()->withExists('order')->get();
+
+        return view('profiles.show', [
+            'profile'       => $profile,
+            'items'         => $items,
+            'showSoldLabel' => ! $isBuyPage,
+        ]);
     }
 
     /**
