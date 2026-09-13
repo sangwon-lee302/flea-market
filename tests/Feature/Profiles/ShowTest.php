@@ -35,6 +35,7 @@ class ShowTest extends TestCase
         $response->assertSee($item->name);
         $response->assertSee($soldItem->name);
         $response->assertSee('Sold');
+        $response->assertSee(route('items.show', $soldItem));
 
         $response = $this->actingAs($user)
             ->get('/mypage/'.$user->profile->id.'?page=buy');
