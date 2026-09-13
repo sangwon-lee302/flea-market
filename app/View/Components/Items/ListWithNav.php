@@ -36,7 +36,7 @@ class ListWithNav extends Component
     public function getRoute($routeName, $params = [], $excludingParams = [])
     {
         // do not change the order of request()->query() and $params below
-        // because if both arrays have the same key, the corresponding value for the one in $params has to be prioritized.
+        // because if both arrays have the same key, the one in $params has to be prioritized.
         $allParams = array_merge(request()->query(), $params);
 
         $finalParams = array_diff_key($allParams, array_flip($excludingParams));
