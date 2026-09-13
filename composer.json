@@ -58,6 +58,10 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
+        "stan": [
+            "@php vendor/bin/phpstan analyse -c phpstan.neon",
+            "@php vendor/bin/phpstan analyse -c phpstan-tests.neon"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

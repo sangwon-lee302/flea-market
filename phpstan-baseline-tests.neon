@@ -1,0 +1,14 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method Faker\\Generator\:\:secondaryAddress\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: database/factories/OrderFactory.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: tests/DuskTestCase.php
+
