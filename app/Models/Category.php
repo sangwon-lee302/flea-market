@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Category as CategoryEnum;
+use App\Enums\Category as CategoryEnum;
 use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

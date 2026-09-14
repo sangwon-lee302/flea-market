@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Condition;
+use App\Enums\Condition;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;

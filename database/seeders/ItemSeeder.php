@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Category as CategoryEnum;
-use App\Condition;
+use App\Enums\Category as CategoryEnum;
+use App\Enums\Condition;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;
