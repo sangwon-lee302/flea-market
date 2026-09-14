@@ -1,9 +1,9 @@
 ---
-name: open-pr
-description: Turn the current uncommitted diff into a pull request in one shot -- create a new branch off a base branch (default main), commit, push, and open a PR. Use this whenever the user says things like "open a PR for this", "ship this", "put this on a branch and PR it", "create a PR from these changes", "branch this off develop and PR it", or otherwise asks to turn the working-tree changes into a pull request.
+name: ship
+description: Turn the current uncommitted diff into a pushed branch, and by default a pull request, in one shot -- create a new branch off a base branch (default main), commit, push, and open a PR. Use this whenever the user says things like "open a PR for this", "ship this", "put this on a branch and PR it", "create a PR from these changes", "branch this off develop and PR it", "push this up but don't open a PR yet", "just push the branch, no PR", or otherwise asks to turn the working-tree changes into a pushed branch or pull request.
 ---
 
-# Open PR
+# Ship
 
 Package the current working-tree diff into a pull request: branch, commit, push, open PR.
 
@@ -14,8 +14,9 @@ The user's message invoking this skill may specify:
 - **A base branch** (e.g. "off develop", "base: release/2.0"). If none is given, default to `main`.
 - **Skip commit** (e.g. "don't commit", "just create the branch"). Default: commit.
 - **Skip push** (e.g. "don't push", "keep it local"). Default: push.
+- **Skip PR** (e.g. "don't open a PR", "just push it", "no PR yet"). Default: open PR.
 
-If skip-commit is requested, there is nothing meaningful to push or open a PR for -- create the branch, stop there, and tell the user why the remaining steps were skipped.
+These cascade: if skip-commit is requested, there is nothing meaningful to push or open a PR for -- create the branch, stop there, and tell the user why the remaining steps were skipped. If skip-push is requested, there is nothing to open a PR from -- commit (unless also skipped), stop there, and tell the user why. If skip-PR is requested, branch, commit, and push all still happen normally -- only step 6 is skipped, and tell the user the branch was pushed but no PR was opened.
 
 ## 2. Inspect the current state
 
@@ -48,7 +49,7 @@ Follow this repo's commit conventions -- check CLAUDE.md for language/format rul
 git push -u origin <branch-name>
 ```
 
-## 6. Open the PR
+## 6. Open the PR (unless told not to)
 
 Use `gh pr create` with a HEREDOC body (title under ~70 chars, a short Summary and Test plan section), targeting the resolved base branch, appending whatever attribution line the current session's system reminder specifies for PR descriptions. Return the PR URL to the user.
 
