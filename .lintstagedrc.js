@@ -6,7 +6,7 @@ export default {
             .map((file) => path.relative(process.cwd(), file))
             .join(' ');
 
-        return `./vendor/bin/sail bin pint ${relativeFiles}`;
+        return `./vendor/bin/pint ${relativeFiles}`;
     },
     '**/*.{blade.php,js,css,json,md}': ['npx prettier --write'],
 };

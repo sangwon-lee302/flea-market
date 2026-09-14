@@ -1,1 +1,1 @@
-npx lint-staged
+./vendor/bin/sail npx lint-staged
