@@ -1,4 +1,4 @@
 {
     "useLaravelPint": true,
-    "pintCommand": "./vendor/bin/sail bin pint"
+    "pintCommand": "./vendor/bin/pint"
 }

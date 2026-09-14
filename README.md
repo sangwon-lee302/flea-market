@@ -9,6 +9,7 @@
 - `git clone git@github.com:sangwon-lee302/flea-market.git`
 - `cd flea-market`
 - `docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install --ignore-platform-reqs`
+    - `laravelsail/php85-composer`は存在しないため、PHP 8.4のイメージを使用する。`--ignore-platform-reqs`によりプラットフォーム要件の検査を省略するので、`php: ^8.5`のプロジェクトでも問題なくインストールできる
 - `cp .env.example .env`、`.env`編集(環境変数を変更)
 - Stripeのテスト用APIキー(`STRIPE_KEY`、`STRIPE_SECRET`)を[Stripeダッシュボード](https://dashboard.stripe.com/test/apikeys)から取得し、`.env`に設定
 - `cp .env.dusk.example .env.dusk.local`(Laravel Duskによるテストを実行するため)
@@ -19,7 +20,6 @@
 - `sail artisan migrate --seed`
 - `sail npm i`
 - `sail npm run build`(Laravel Duskによるテスト実行のため`dev`ではなく`build`を使用)
-- ホスト側のOSに直接`Node.js`をインストールする(huskyによるpre-commit時のlint-stagedのため)
 
 ## URL
 
@@ -41,12 +41,16 @@
 ## 使用技術
 
 - Laravel 13.2.0
-- PHP 8.5.3
+- PHP 8.5
 - Mysql 8.4.8
-- Node 24.14.0
+- Node 24
 - Mailpit v1.29.5
 - phpmyadmin 5.2.3
-- Selenium 4.43.0
+- Selenium 4.48.0
+
+PHPとNodeはパッチバージョンを固定していない(Sailのイメージビルド時にaptが提供する最新版が入るため)。
+そのため、実際に保証される粒度に合わせてマイナー/メジャーまでを記載している。
+その他はイメージタグや`composer.lock`で固定しているため、パッチバージョンまで記載している。
 
 ## ER図
 
