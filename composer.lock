@@ -7377,16 +7377,16 @@
         },
         {
             "name": "laravel-lang/actions",
-            "version": "1.12.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/actions.git",
-                "reference": "af2750ace5fd7655b696c39f3f6d0da9ce852d16"
+                "reference": "5e9bbd3b8af3fed4b733e424c56810b0d3e81377"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/af2750ace5fd7655b696c39f3f6d0da9ce852d16",
-                "reference": "af2750ace5fd7655b696c39f3f6d0da9ce852d16",
+                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/5e9bbd3b8af3fed4b733e424c56810b0d3e81377",
+                "reference": "5e9bbd3b8af3fed4b733e424c56810b0d3e81377",
                 "shasum": ""
             },
             "require": {
@@ -7438,7 +7438,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/actions/issues",
-                "source": "https://github.com/Laravel-Lang/actions/tree/1.12.1"
+                "source": "https://github.com/Laravel-Lang/actions/tree/1.13.2"
             },
             "funding": [
                 {
@@ -7450,20 +7450,20 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2026-03-17T21:27:37+00:00"
+            "time": "2026-05-30T12:11:11+00:00"
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.15.5",
+            "version": "2.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "b0938874353d376e8f5d646e6f77db265c9aafd5"
+                "reference": "4a0de72632bb1862532977fd76ed6be9c1cc65af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/b0938874353d376e8f5d646e6f77db265c9aafd5",
-                "reference": "b0938874353d376e8f5d646e6f77db265c9aafd5",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/4a0de72632bb1862532977fd76ed6be9c1cc65af",
+                "reference": "4a0de72632bb1862532977fd76ed6be9c1cc65af",
                 "shasum": ""
             },
             "require": {
@@ -7517,7 +7517,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.15.5"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.16.4"
             },
             "funding": [
                 {
@@ -7529,7 +7529,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2026-03-24T15:20:52+00:00"
+            "time": "2026-05-30T12:11:05+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -7843,16 +7843,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.29.2",
+            "version": "15.35.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "791087e95fc8525c227f292ea6f6d4867f0bb2dc"
+                "reference": "b15ba95800ce9ad2ba24e1edc802ecf9738f7a87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/791087e95fc8525c227f292ea6f6d4867f0bb2dc",
-                "reference": "791087e95fc8525c227f292ea6f6d4867f0bb2dc",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/b15ba95800ce9ad2ba24e1edc802ecf9738f7a87",
+                "reference": "b15ba95800ce9ad2ba24e1edc802ecf9738f7a87",
                 "shasum": ""
             },
             "require": {
@@ -7913,7 +7913,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2026-03-21T00:27:29+00:00"
+            "time": "2026-09-14T08:41:53+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
