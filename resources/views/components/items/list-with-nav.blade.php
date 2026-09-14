@@ -23,7 +23,7 @@
                     alt="商品画像"
                     class="aspect-square w-full rounded-sm object-cover"
                 />
-                @if ($showSoldLabel && $item->order_exists)
+                @if ($showSoldLabel && $item->hasAttribute('order_exists') && $item->order_exists)
                     <div
                         class="absolute inset-0 flex items-center justify-center bg-gray-600/50 text-2xl text-white"
                     >
