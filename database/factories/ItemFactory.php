@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Condition;
+use App\Enums\Condition;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;

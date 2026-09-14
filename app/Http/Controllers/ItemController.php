@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Condition;
+use App\Enums\Category;
+use App\Enums\Condition;
 use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Services\ItemService;

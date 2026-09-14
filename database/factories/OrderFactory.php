@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\PaymentMethod;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
-use App\PaymentMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

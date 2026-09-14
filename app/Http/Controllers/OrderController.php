@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentMethod;
 use App\Http\Requests\OrderRequest;
 use App\Models\Item;
 use App\Models\Order;
-use App\PaymentMethod;
 
 class OrderController extends Controller
 {

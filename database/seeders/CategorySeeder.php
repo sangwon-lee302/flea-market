@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Category as CategoryEnum;
+use App\Enums\Category as CategoryEnum;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
