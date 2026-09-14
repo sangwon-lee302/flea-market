@@ -2,18 +2,20 @@
 
 namespace App\Actions\Fortify;
 
-use App\Http\Requests\UnnecessaryCustomRegisterRequestJustToMeetTheSpecs;
 use App\Models\Profile;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
+    use PasswordValidationRules;
+
     /**
      * Validate and create a newly registered user.
      *
@@ -23,9 +25,18 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        Validator::make($input,
-            (new UnnecessaryCustomRegisterRequestJustToMeetTheSpecs)->rules()
-        )->validate();
+        Validator::make($input, [
+            'name'  => ['required', 'string', 'max:20'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password'              => $this->passwordRules(),
+            'password_confirmation' => ['required', 'same:password'],
+        ])->validate();
 
         return DB::transaction(function () use ($input) {
             try {
