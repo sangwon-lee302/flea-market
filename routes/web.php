@@ -16,19 +16,19 @@ Route::middleware('profile.complete')->name('items.')->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->group(function () {
-    Route::get('mypage/{profile}', [ProfileController::class, 'show'])->name('show');
-    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->withoutMiddleware(['profile.complete'])->name('edit');
-    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->withoutMiddleware(['profile.complete'])->name('update');
+    Route::get('mypage/{profile}', [ProfileController::class, 'show'])->can('view', 'profile')->name('show');
+    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->can('update', 'profile')->withoutMiddleware(['profile.complete'])->name('edit');
+    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->can('update', 'profile')->withoutMiddleware(['profile.complete'])->name('update');
 });
 
 Route::middleware(['auth', 'profile.complete'])->name('likes.')->group(function () {
-    Route::post('likes/{item}/toggle', [LikeController::class, 'toggle'])->name('toggle');
+    Route::post('likes/{item}/toggle', [LikeController::class, 'toggle'])->can('like', 'item')->name('toggle');
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('orders.')->group(function () {
-    Route::get('purchase/{item}', [OrderController::class, 'create'])->name('create');
-    Route::post('purchase/{item}', [OrderController::class, 'checkout'])->name('checkout');
-    Route::get('purchase/{item}/success', [OrderController::class, 'success'])->name('success');
+    Route::get('purchase/{item}', [OrderController::class, 'create'])->can('purchase', 'item')->name('create');
+    Route::post('purchase/{item}', [OrderController::class, 'checkout'])->can('purchase', 'item')->name('checkout');
+    Route::get('purchase/{item}/success', [OrderController::class, 'success'])->can('purchase', 'item')->name('success');
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('comments.')->group(function () {
@@ -36,6 +36,6 @@ Route::middleware(['auth', 'verified', 'profile.complete'])->name('comments.')->
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('shipping_addresses.')->group(function () {
-    Route::post('purchase/address/{item}', [ShippingAddressSessionController::class, 'edit'])->name('edit');
-    Route::post('purchase/address/{item}/update', [ShippingAddressSessionController::class, 'update'])->name('update');
+    Route::post('purchase/address/{item}', [ShippingAddressSessionController::class, 'edit'])->can('purchase', 'item')->name('edit');
+    Route::post('purchase/address/{item}/update', [ShippingAddressSessionController::class, 'update'])->can('purchase', 'item')->name('update');
 });

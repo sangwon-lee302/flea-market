@@ -68,7 +68,7 @@ class ShippingAddressTest extends TestCase
             ->assertViewIs('orders.create');
 
         $order = Order::factory()->recycle([$user, $item])
-            ->create(['payment_method' => 2]) // since webhook isn't implemented, only card payment would be tested here
+            ->make(['payment_method' => 2]) // since webhook isn't implemented, only card payment would be tested here
             ->toArray();
 
         $this->actingAs($user)

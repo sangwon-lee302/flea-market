@@ -16,7 +16,7 @@ class LikeTest extends DuskTestCase
     public function test_likes_count_updated_after_liking(): void
     {
         $user = User::factory()->withProfileCompleted()->create();
-        $item = Item::factory()->recycle($user)->create();
+        $item = Item::factory()->create(); // a listing by another user; sellers cannot like their own
 
         $this->browse(function (Browser $browser) use ($user, $item) {
             $browser->loginAs($user)
@@ -36,7 +36,7 @@ class LikeTest extends DuskTestCase
     public function test_likes_icon_updated_after_liking(): void
     {
         $user = User::factory()->withProfileCompleted()->create();
-        $item = Item::factory()->recycle($user)->create();
+        $item = Item::factory()->create(); // a listing by another user; sellers cannot like their own
 
         $this->browse(function (Browser $browser) use ($user, $item) {
             $browser->loginAs($user)
@@ -51,7 +51,7 @@ class LikeTest extends DuskTestCase
     public function test_likes_count_updated_after_unliking(): void
     {
         $user = User::factory()->withProfileCompleted()->create();
-        $item = Item::factory()->recycle($user)->create();
+        $item = Item::factory()->create(); // a listing by another user; sellers cannot like their own
         Like::factory()->recycle([$user, $item])->create();
 
         $this->browse(function (Browser $browser) use ($user, $item) {

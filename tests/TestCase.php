@@ -8,10 +8,14 @@ use Tests\Support\FakeStripeHttpClient;
 
 abstract class TestCase extends BaseTestCase
 {
+    protected FakeStripeHttpClient $stripe;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        ApiRequestor::setHttpClient(new FakeStripeHttpClient);
+        $this->stripe = new FakeStripeHttpClient;
+
+        ApiRequestor::setHttpClient($this->stripe);
     }
 }

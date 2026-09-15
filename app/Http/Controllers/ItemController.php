@@ -64,6 +64,7 @@ class ItemController extends Controller
     {
         $item->load(['comments.user.profile']);
         $item->loadCount(['likes', 'comments']);
+        $item->loadExists('order');
 
         $isLiked = auth()->check()
             ? auth()->user()->likedItems()->where('item_id', $item->id)->exists()
