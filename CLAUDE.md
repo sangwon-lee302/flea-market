@@ -10,7 +10,5 @@
 
 ## Language
 
-- **Commit messages**: Always write in English.
-- **Code comments**: Always write in English, regardless of the language used in conversation with the user.
-
-These rules apply even when the user writes instructions in Japanese. Conversation replies to the user may still be in Japanese.
+- Write code comments (PHPDoc/inline comments, Blade comments, JS comments) in Japanese.
+- Write git commit messages in Japanese. Keep any Conventional Commits prefix (`feat:`, `fix:`, `chore:`, etc.) in English and write the subject and body in Japanese.
