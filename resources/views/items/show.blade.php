@@ -12,7 +12,9 @@
         <p class="mt-4 text-lg">&yen;<span class="text-3xl">{{ number_format($item->price) }}</span><span class="pl-2 text-xl">(税込)</span></p>
         {{-- likes/comments icons and number --}}
         <div class="flex gap-8 px-6 py-3">
-            <x-like-button :item="$item" :is-liked="$isLiked" />
+            @can ('like', $item)
+                <x-like-button :item="$item" :is-liked="$isLiked" />
+            @endcan
             <div class="flex flex-col items-center">
                 <img
                     src="{{ asset('images/comments.png') }}"
@@ -22,12 +24,18 @@
                 <span class="font-semibold">{{ $item->comments_count }}</span>
             </div>
         </div>
-        <a
-            id="checkout-button"
-            href="{{ route('orders.create', ['item' => $item]) }}"
-            class="btn btn-primary"
-            >購入手続きへ</a
-        >
+        @can ('purchase', $item)
+            <a
+                id="checkout-button"
+                href="{{ route('orders.create', ['item' => $item]) }}"
+                class="btn btn-primary"
+                >購入手続きへ</a
+            >
+        @else
+            <span class="btn btn-disabled" aria-disabled="true">
+                {{ $item->order_exists ? '売り切れました' : '自分が出品した商品です' }}
+            </span>
+        @endcan
         <h2 class="py-6 text-2xl font-bold">商品説明</h2>
         <p class="py-2 whitespace-pre-wrap">{{ $item->description }}</p>
         <h2 class="py-6 text-2xl font-bold">商品の情報</h2>
