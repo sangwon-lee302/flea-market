@@ -16,9 +16,9 @@ Route::middleware('profile.complete')->name('items.')->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'profile.complete'])->name('profiles.')->group(function () {
-    Route::get('mypage/{profile}', [ProfileController::class, 'show'])->name('show');
-    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->withoutMiddleware(['profile.complete'])->name('edit');
-    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->withoutMiddleware(['profile.complete'])->name('update');
+    Route::get('mypage/{profile}', [ProfileController::class, 'show'])->can('view', 'profile')->name('show');
+    Route::get('mypage/profile/{profile}', [ProfileController::class, 'edit'])->can('update', 'profile')->withoutMiddleware(['profile.complete'])->name('edit');
+    Route::patch('mypage/{profile}', [ProfileController::class, 'update'])->can('update', 'profile')->withoutMiddleware(['profile.complete'])->name('update');
 });
 
 Route::middleware(['auth', 'profile.complete'])->name('likes.')->group(function () {
