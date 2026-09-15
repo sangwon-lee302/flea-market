@@ -55,7 +55,7 @@ class Order extends Model
     /**
      * Prepare for redirecting to the actual billing page.
      */
-    public static function prepareCheckout(Item $item, string $paymentMethod): string
+    public static function prepareCheckout(Item $item, User $buyer, string $paymentMethod): string
     {
         $paymentTypes = match (PaymentMethod::from($paymentMethod)) {
             PaymentMethod::Konbini => ['konbini'],
@@ -74,12 +74,42 @@ class Order extends Model
                 ],
                 'quantity' => 1,
             ]],
-            'mode'        => 'payment',
-            'success_url' => route('orders.success', ['item' => $item]),
+            'mode' => 'payment',
+            // Stripe stores metadata values as strings.
+            'metadata'    => ['item_id' => (string) $item->id, 'user_id' => (string) $buyer->id],
+            'success_url' => route('orders.success', ['item' => $item]).'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url'  => route('orders.create', ['item' => $item]),
         ]);
 
         return $checkout_session->url;
+    }
+
+    /**
+     * Determine whether the given Checkout Session records a completed payment
+     * by this buyer for this item.
+     *
+     * Stripe sends the buyer back to a plain GET url, so the session id in the
+     * query string is the only evidence that a payment happened. Without this
+     * check the success route would mint an order for anyone who visits it.
+     */
+    public static function isPaidFor(?string $sessionId, Item $item, User $buyer): bool
+    {
+        if (blank($sessionId)) {
+            return false;
+        }
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = Session::retrieve($sessionId);
+
+        if ($session->payment_status !== 'paid') {
+            return false;
+        }
+
+        $metadata = $session->metadata?->toArray() ?? [];
+
+        return (int) ($metadata['item_id'] ?? 0) === $item->id
+            && (int) ($metadata['user_id'] ?? 0) === $buyer->id;
     }
 
     /**

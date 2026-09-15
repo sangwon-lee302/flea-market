@@ -6,6 +6,7 @@ use App\Enums\PaymentMethod;
 use App\Http\Requests\OrderRequest;
 use App\Models\Item;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -42,7 +43,7 @@ class OrderController extends Controller
 
         session()->forget('order_data');
 
-        $checkout_url = Order::prepareCheckout($item, $validated['payment_method']);
+        $checkout_url = Order::prepareCheckout($item, auth()->user(), $validated['payment_method']);
 
         return redirect($checkout_url);
     }
@@ -50,11 +51,17 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage after successful checkout.
      */
-    public function success(Item $item)
+    public function success(Request $request, Item $item)
     {
+        $user = auth()->user();
+
+        abort_unless(Order::isPaidFor($request->query('session_id'), $item, $user), 403);
+
         $orderData = session('validated_order_data');
 
-        Order::storeOrder(auth()->user(), $item, $orderData);
+        abort_if(blank($orderData), 403);
+
+        Order::storeOrder($user, $item, $orderData);
 
         session()->forget('validated_order_data');
 
